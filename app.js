@@ -15,7 +15,9 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/imuebles', {useNewUrlParser: true})
+  .connect( process.env.DB || 'mongodb://localhost/imuebles', {
+    useNewUrlParser: true
+  })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -66,7 +68,7 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 // Enable authentication using session + passport
 app.use(session({
-  secret: 'irongenerator',
+  secret: process.env.SECRET,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore( { mongooseConnection: mongoose.connection })
