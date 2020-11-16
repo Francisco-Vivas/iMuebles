@@ -9,7 +9,7 @@ const userSchema = new Schema({
 },
   carritoDeCompras: {
     
-  }
+  },
   username: String,
   password: String,
   role: {
