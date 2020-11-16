@@ -8,8 +8,9 @@ const userSchema = new Schema({
     required: true
 },
   carritoDeCompras: {
-    
-  }
+    type: Schema.Types.ObjectId,
+    ref: 'Product'
+  },
   username: String,
   password: String,
   role: {
@@ -17,6 +18,7 @@ const userSchema = new Schema({
     enum: ['ADMIN', 'VENDEDOR', 'COMPRADOR'],
     default: 'USUARIO'
 },
+    location: String,
     facebookID: String,
     googleID: String,
     microsoftID: String
