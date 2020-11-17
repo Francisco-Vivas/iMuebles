@@ -1,0 +1,17 @@
+<h1>Edit Product</h1>
+<form action="/products/{{_id}}/edit" method="post" enctype="multipart/form-data">
+  <input type="text" name="name" id="name" value="{{name}}"> <br>
+  <input type="text" name="description" id="description" value="{{description}}"> <br>
+  <h4>Images</h4>
+  {{#each imagesURL}}
+  <img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
+  <br>
+
+  {{/each}}
+  <input type="file" name="imagesURL" id="imagesURL"> <br>
+  <br>
+
+  <input type="number" name="quantity" id="quantity" value="{{quantity}}"> <br>
+  <input type="number" name="price" id="price" value="{{price}}"> <br>
+  <button type="submit">Edit Product</button>
+</form>

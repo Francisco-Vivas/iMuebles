@@ -1,0 +1,20 @@
+{{#if error}}
+<h1>I can't find it :c</h1>
+<p style="color: crimson">{{error}}</p>
+<p>But you can create it! <a href="/products/new">Click here.</a></p>
+
+{{/if}}
+
+{{#if name}}
+<h1>{{name}}</h1>
+<br>
+{{#each imagesURL}}
+<img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
+{{/each}}
+<small><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></small>
+<p>{{description}}</p>
+<hr>
+{{#if _id}}
+<a href="/products/{{_id}}/edit">Edit it!</a>
+{{/if}}
+{{/if}}
