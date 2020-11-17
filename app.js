@@ -16,7 +16,8 @@ const flash      = require("connect-flash");
 
 mongoose
   .connect( process.env.DB || 'mongodb://localhost/imuebles', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
   })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
@@ -82,6 +83,9 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
+const userRoutes = require('./routes/user');
+app.use ('/user', userRoutes);
       
 
 module.exports = app;

@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 
+
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
@@ -25,15 +26,16 @@ router.get("/signup", (req, res, next) => {
 
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
-  if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+  if (email === "" || password === "") {
+    res.render("auth/signup", { message: "Indicate email and password" });
     return;
   }
 
-  User.findOne({ username }, "username", (err, user) => {
+  User.findOne({ email }, "email", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The username already exists" });
+      res.render("auth/signup", { message: "The email already exists" });
       return;
     }
 
@@ -42,7 +44,9 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass
+      email,
+      password: hashPass,
+      
     });
 
     newUser.save()
@@ -59,5 +63,24 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+//google//
+const googleInit = passport.authenticate("google", {
+  scope: [
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ]
+  
+})
+
+const googleCb = passport.authenticate("google", {
+  successRedirect: "/private",
+  failureRedirect: "/login"
+})
+
+router.get("/google", googleInit)
+router.get("/google/callback", googleCb)
+
+
 
 module.exports = router;
