@@ -1,23 +1,29 @@
 exports.isAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
-    next()
+    next();
   } else {
-    res.redirect("/")
+    res.redirect("/");
   }
-}
+};
 
 exports.isNotAuth = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    next()
+    next();
   } else {
-    res.redirect("/")
+    res.redirect("/");
   }
-}
+};
 
-exports.checkRoles = roles => (req, res, next) => {
+exports.checkRoles = (roles) => (req, res, next) => {
   if (roles.includes(req.user.role)) {
-    return next()
+    return next();
   } else {
-    res.redirect("/")
+    res.redirect("/");
   }
-}
+};
+
+exports.setLocalUser = (app) => (req, res, next) => {
+  if (req.user) app.locals.user = req.user;
+  else app.locals.user = null;
+  next();
+};

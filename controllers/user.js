@@ -1,16 +1,15 @@
-
-const express = require ('express')
+const express = require("express");
 const router = express.Router();
 
-exports.privatePage = (req, res) => {
-  res.render("private", req.user)
-}
+exports.profilePage = (req, res) => {
+  res.render("profile", req.user);
+};
 exports.compradorPage = (req, res) => {
-  res.render("comprador")
-}
+  res.render("comprador");
+};
 exports.vendedorPage = (req, res) => {
-  res.render("vendedor")
-}
+  res.render("vendedor");
+};
 exports.usuarioPage = (req, res) => {
-  res.render("usuario")
-}
+  res.render("usuario");
+};

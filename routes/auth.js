@@ -5,6 +5,7 @@ const User = require("../models/User");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
+const { googleInit, googleCb } = require("../controllers/google.controller");
 const bcryptSalt = 10;
 
 
@@ -64,23 +65,8 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-//google//
-const googleInit = passport.authenticate("google", {
-  scope: [
-    "https://www.googleapis.com/auth/userinfo.profile",
-    "https://www.googleapis.com/auth/userinfo.email"
-  ]
-  
-})
-
-const googleCb = passport.authenticate("google", {
-  successRedirect: "/private",
-  failureRedirect: "/login"
-})
-
 router.get("/google", googleInit)
 router.get("/google/callback", googleCb)
-
 
 
 module.exports = router;
