@@ -66,7 +66,7 @@ hbs.registerHelper("ifUndefined", (value, options) => {
 });
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "iMuebles";
 
 // Enable authentication using session + passport
 app.use(
@@ -93,5 +93,8 @@ app.use("/user", userRoutes);
 
 const productRoutes = require("./routes/product.routes");
 app.use("/products", productRoutes);
+
+const cartRoutes = require("./routes/cart.routes");
+app.use("/cart", cartRoutes);
 
 module.exports = app;

@@ -1,7 +1,6 @@
 const { create } = require("../models/Product.model");
 const ProductModel = require("../models/Product.model");
-const mercadopago = require('../configs/mercadopago');
-
+const mercadopago = require("../configs/mercadopago");
 
 module.exports = {
   async list(req, res) {
@@ -42,7 +41,9 @@ module.exports = {
             errorMessage: "This product does not exist.",
           });
         if (!req.user || String(product.ownerID) !== String(req.user._id)) {
-          product._id = null; // Check if is the owner of the product so he can edit it.
+          product.canEdit = false;
+        } else {
+          product.canEdit = true;
         }
         product.formatedPrice = `$${(product.price / 1000).toFixed(2)} USD`;
         return res.render("products/detail", product);
