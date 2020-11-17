@@ -11,8 +11,11 @@
 
   <nav>
     <a href="/">Home</a>
+    {{!-- SOLO POR DESARROLLO - DEFINIR ESTILO Y QUITAR ESTE LINK --}}
+    <a href="/products">Products</a> 
     {{#if user}}
     <a href="/user/profile">Profile</a>
+    <a href="/products/new">Add New Product</a>
     <a href="/auth/logout">Logout</a>
     {{else}}
     <a href="/auth/login">Login</a>
