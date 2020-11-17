@@ -7,10 +7,17 @@ const userSchema = new Schema({
     unique: true,
     required: true
 },
-  carritoDeCompras: {
-    type: Schema.Types.ObjectId,
-    ref: 'Product'
-  },
+carritoDeCompras: [
+  { 
+    productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
+       },
+    quantity: {
+        type: Number
+    }  
+  }
+],
   username: String,
   password: String,
   role: {
