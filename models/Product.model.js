@@ -3,12 +3,12 @@ const { Schema, model } = require('mongoose');
 const productSchema = new Schema({
   name:String,
   description: String,
-  pictures: {
+  imagesURL: {
     type: [String],
     default: 'https://aqt.cl/wp-content/uploads/2020/09/sin_imagen.jpg'
   },
   price: Number,
-  seller: {
+  ownerID: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
