@@ -1,0 +1,16 @@
+<h1>Products</h1>
+<br>
+{{#if errorMessage}}
+<p style="color: crimson">{{errorMessage}}</p>
+{{/if}}
+
+{{#each products}}
+<h3>{{name}}</h3>
+{{#each imagesURL}}
+<img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
+{{/each}}
+<p><span>${{price}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></p>
+
+<a href="/products/{{_id}}">Details</a>
+<hr>
+{{/each}}
