@@ -14,7 +14,16 @@
 <small><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></small>
 <p>{{description}}</p>
 <hr>
+<form method="POST" action="/item/bought">
+  <script src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
+    data-preference-id='{{prefenceId}}' data-button-label="Pay">
+    </script>
+</form>
+
+<a href="/carrito"><button>Agregar al carrito de compras</button></a>
+
 {{#if _id}}
+
 <a href="/products/{{_id}}/edit">Edit it!</a>
 {{/if}}
 {{/if}}
