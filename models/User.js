@@ -1,41 +1,43 @@
-const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  email: {
-    type: String,
-    unique: true,
-    required: true
-},
-carritoDeCompras: [
-  { 
-    productId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Product'
-       },
-    quantity: {
-        type: Number
-    }  
-  }
-],
-  username: String,
-  password: String,
-  role: {
-    type: String,
-    enum: ['ADMIN', 'VENDEDOR', 'COMPRADOR', 'USUARIO'],
-    default: 'USUARIO'
-},
+const userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    carritoDeCompras: [
+      {
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+        },
+        quantity: {
+          type: Number,
+        },
+      },
+    ],
+    username: String,
+    password: String,
+    role: {
+      type: String,
+      enum: ["ADMIN", "VENDEDOR", "COMPRADOR", "USUARIO"],
+      default: "USUARIO",
+    },
     location: String,
     facebookID: String,
     googleID: String,
-    microsoftID: String
-
-}, {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    microsoftID: String,
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
   }
-});
+);
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;
