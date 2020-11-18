@@ -5,8 +5,13 @@ const User = require("../models/User");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
+
+//controllers
 const { googleInit, googleCb } = require("../controllers/google.controller");
+const {facebookInit, facebookCb} = require ("../controllers/facebook.controller")
 const { createNewCart } = require("../controllers/cart.controller");
+
+
 const bcryptSalt = 10;
 
 router.get("/login", (req, res, next) => {
@@ -71,7 +76,10 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/google", googleInit);
-router.get("/google/callback", googleCb);
+router.get("/google", googleInit)
+router.get("/google/callback", googleCb)
+
+router.get('/facebook', facebookInit)
+router.get('/facebook/callback', facebookCb)
 
 module.exports = router;
