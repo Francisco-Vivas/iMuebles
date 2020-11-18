@@ -2,6 +2,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 const { createNewCart } = require("../controllers/cart.controller");
 const User = require("../models/User");
+const {sendEmail} = require('../configs/nodemailer')
 
 passport.use(
   new GoogleStrategy(
@@ -24,7 +25,9 @@ passport.use(
           cartId,
           email: profile.emails[0].value,
           googleID: profile.id,
+
         });
+        sendEmail(newUser.username, newUser.email, 'Bienvenido a iMuebles', 'Gracias por unirte a nuestra familia');
         console.log(newUser);
         done(null, newUser);
       } catch (err) {
