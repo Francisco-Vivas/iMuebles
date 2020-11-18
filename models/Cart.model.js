@@ -9,6 +9,14 @@ const cartSchema = new Schema(
       },
     ],
     quantity: [Number],
+    mercadoPagoId: {
+      type: Number,
+      default: 0,
+    },
+    buy_date: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     timestamps: true,

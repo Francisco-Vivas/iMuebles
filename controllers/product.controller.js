@@ -3,11 +3,14 @@ const mercadopago = require("../configs/mercadopago");
 
 module.exports = {
   async list(req, res) {
-    const products = await ProductModel.find();
+    let products = await ProductModel.find();
     if (!products.length)
       return res.render("products/index", {
         errorMessage: "Wow.. such empty! Try to add something ;)",
       });
+    products.map(
+      (ele) => (ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`)
+    );
     return res.render("products/index", { products });
   },
 
@@ -55,7 +58,7 @@ module.exports = {
         } else {
           product.canEdit = true;
         }
-        product.formatedPrice = `$${(product.price / 1000).toFixed(2)} USD`;
+        product.formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
         return res.render("products/detail", product);
       })
       .catch(() =>
@@ -117,11 +120,12 @@ module.exports = {
   },
 
   async showMyProducts(req, res) {
-    const products = await ProductModel.find({ ownerID: req.user._id });
+    let products = await ProductModel.find({ ownerID: req.user._id });
     if (!products)
       return res.render("products/myProducts", {
         errorMessage: "No tienes productos aún :(",
       });
+    products.map((ele) => (ele.price = Number(ele.price / 100).toFixed(2)));
     return res.render("products/myProducts", { products });
   },
 };
