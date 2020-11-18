@@ -27,8 +27,6 @@ module.exports = {
       };
     });
 
-    console.log(cartItems);
-
     if (!cartItems.length)
       return res.render("cart/index", {
         errorMessage: "Aún no tienes nada en tu carrito. Intenta añadir algo.",
