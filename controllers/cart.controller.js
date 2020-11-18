@@ -27,23 +27,41 @@ module.exports = {
       };
     });
 
-    if (!cartItems.length)
+    if (!cartItems.length) {
       return res.render("cart/index", {
         errorMessage: "Aún no tienes nada en tu carrito. Intenta añadir algo.",
       });
+    }
 
+    const productoAEnviar = cart.productId.map((ele, idx) => {
+      return {
+        id: ele._id,
+        title: ele.name,
+        description: ele.description,
+        unit_price: Number(ele.price / 100),
+        quantity: cart.quantity[idx],
+        currency_id: "USD",
+      };
+    });
+    // TODO: REVISAR PRODUCTOAENVIAR ============0*/
     const preference = {
-      items: cart.productId.map((ele, idx) => {
-        return {
-          id: ele._id,
-          title: ele.name,
-          description: ele.description,
-          unit_price: Number(ele.price / 100),
-          quantity: cart.quantity[idx],
-          currency_id: "USD",
-        };
-      }),
+      items: productoAEnviar,
     };
+
+    // const preference = {
+    //   items: [
+    //     {
+    //       title: cart.productId[0].name,
+    //       unit_price: Number(cart.productId[0].price / 100),
+    //       currency_id: "USD",
+    //       quantity: 1,
+    //     },
+    //   ],
+    //   notification_url:
+    //     "https://webhook.site/88151d93-fd67-40d5-87f1-46b71cf8cae8",
+    // };
+
+    console.log(preference);
     const response = await mercadopago.preferences.create(preference);
     const preferenceId = response.body.id;
 

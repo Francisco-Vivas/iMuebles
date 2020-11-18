@@ -20,11 +20,17 @@
   </form>
   <hr>
 {{/each}}
+<p>{{preferenceId}}</p>
 <p>Total: {{totalPrice}}</p>
 <form method="POST" action="/cart/bought">
-  <script src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
+  {{!-- <script src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
     data-preference-id='{{preferenceId}}' data-button-label="Alquilar">
-    </script>
+    </script> --}}
+
+  <script
+    src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
+    data-preference-id='{{preferenceId}}'  data-button-label="Alquilar">
+  </script>
 </form>
 
 {{/if}}
