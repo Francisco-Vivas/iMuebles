@@ -97,4 +97,7 @@ app.use("/products", productRoutes);
 const cartRoutes = require("./routes/cart.routes");
 app.use("/cart", cartRoutes);
 
+const searchRoutes = require("./routes/search.routes");
+app.use("/search", searchRoutes);
+
 module.exports = app;

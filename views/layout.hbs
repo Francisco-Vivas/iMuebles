@@ -13,6 +13,10 @@
     <a href="/">Home</a>
     {{!-- SOLO POR DESARROLLO - DEFINIR ESTILO Y QUITAR ESTE LINK --}}
     <a href="/products">Products</a> 
+    <form action="/search" method="post">
+    <input type="text" name="product" id="product" placeholder="Search...">
+    <button type="submit">Buscar</button>
+    </form>
     {{#if user}}
     <a href="/user/profile">Profile</a>
     <a href="/products/new">Add New Product</a>
