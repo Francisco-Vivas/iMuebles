@@ -1,5 +1,5 @@
-const { create } = require("../models/Product.model");
 const ProductModel = require("../models/Product.model");
+const mercadopago = require("../configs/mercadopago");
 
 module.exports = {
   async list(req, res) {
@@ -17,16 +17,27 @@ module.exports = {
 
   async create(req, res) {
     const { name, description, quantity, price } = req.body;
-    let imagesURL = req.file.path;
+    let newProduct;
+    if (req.file) {
+      newProduct = {
+        name,
+        description,
+        price,
+        quantity,
+        ownerID: req.user._id,
+        imagesURL: req.file.path,
+      };
+    } else {
+      newProduct = {
+        name,
+        description,
+        price,
+        quantity,
+        ownerID: req.user._id,
+      };
+    }
 
-    await ProductModel.create({
-      name,
-      description,
-      price,
-      quantity,
-      ownerID: req.user._id,
-      imagesURL,
-    });
+    await ProductModel.create(newProduct);
     res.redirect("/products");
   },
 
@@ -40,7 +51,9 @@ module.exports = {
             errorMessage: "This product does not exist.",
           });
         if (!req.user || String(product.ownerID) !== String(req.user._id)) {
-          product._id = null; // Check if is the owner of the product so he can edit it.
+          product.canEdit = false;
+        } else {
+          product.canEdit = true;
         }
         product.formatedPrice = `$${(product.price / 1000).toFixed(2)} USD`;
         return res.render("products/detail", product);
@@ -67,7 +80,7 @@ module.exports = {
 
     const { imagesURL } = await ProductModel.findById(productId);
     let updateObj;
-    // Si ingresa imágen nueva
+    // Si ingresa imagen nueva
     if (req.file) {
       let newImage = req.file.path;
       if (imagesURL[0].includes("https://aqt.cl/wp-content")) {
@@ -101,5 +114,14 @@ module.exports = {
     await ProductModel.findByIdAndUpdate(productId, updateObj, { new: true });
 
     res.redirect("/products");
+  },
+
+  async showMyProducts(req, res) {
+    const products = await ProductModel.find({ ownerID: req.user._id });
+    if (!products)
+      return res.render("products/myProducts", {
+        errorMessage: "No tienes productos aún :(",
+      });
+    return res.render("products/myProducts", { products });
   },
 };

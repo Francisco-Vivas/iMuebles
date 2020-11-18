@@ -1,5 +1,4 @@
 {{#if error}}
-<h1>I can't find it :c</h1>
 <p style="color: crimson">{{error}}</p>
 <p>But you can create it! <a href="/products/new">Click here.</a></p>
 
@@ -15,7 +14,15 @@
 <small><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></small>
 <p>{{description}}</p>
 <hr>
-{{#if _id}}
+<form action="/cart/addItem" method="post">
+<input type="text" value="{{_id}}" name="productId" hidden>
+<label for="number">Cantidad:</label> <br>
+<input type="number" name="quantity" max="{{quantity}}" min="0" value="1"> <br>
+<button type="submit">Reservar</button>
+</form>
+
+{{#if canEdit}}
+
 <a href="/products/{{_id}}/edit">Edit it!</a>
 {{/if}}
 {{/if}}
