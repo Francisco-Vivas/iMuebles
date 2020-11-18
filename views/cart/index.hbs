@@ -1,20 +1,37 @@
 <h1>Productos Reservados</h1>
+<br>
+{{#if errorMessage}}
+<p style="color: crimson">{{errorMessage}}</p>
+{{/if}}
+
+{{#if cartItems}}
+
 {{#each cartItems}}
-<h3>{{productId.name}}</h3>
-{{#each productId.imagesURL}}
-<img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
+  <h3>{{productId.name}}</h3>
+  {{#each productId.imagesURL}}
+    <img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
+  {{/each}}
+  <small>{{productId.category}}</small>
+  <p>Cantidad de Unidades: {{quantity}}</p>
+  <p>Subtotal: {{subtotal}}</p>
+  <form action="/cart/deleteItem" method="POST">
+  <input type="number" name="indx" value="{{indx}}" hidden>
+  <button type="submit">Delete</button>
+  </form>
+  <hr>
 {{/each}}
-<small>{{productId.category}}</small>
-<p>{{quantity}}</p>
-<p>Subtotal: {{subtotal}}</p>
-<form action="/cart/deleteItem" method="POST">
-<input type="number" name= value="{{indx}}" hidden>
-<button type="submit">Delete</button>
-</form>
-<hr>
-{{/each}}
+<p>{{preferenceId}}</p>
+<p>Total: {{totalPrice}}</p>
 <form method="POST" action="/cart/bought">
-  <script src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
+  {{!-- <script src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
     data-preference-id='{{preferenceId}}' data-button-label="Alquilar">
-    </script>
+    </script> --}}
+
+  <script
+    src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
+    data-preference-id='{{preferenceId}}'  data-button-label="Alquilar">
+  </script>
 </form>
+
+{{/if}}
+
