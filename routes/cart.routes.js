@@ -11,6 +11,6 @@ const router = require("express").Router();
 router.get("/", isAuth, showCart);
 router.post("/addItem", isAuth, addItem);
 router.post("/deleteItem", isAuth, deleteItem);
-router.get("/bought", isAuth, boughtCart);
+router.post("/bought", isAuth, boughtCart);
 
 module.exports = router;
