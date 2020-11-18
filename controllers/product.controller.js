@@ -1,4 +1,3 @@
-const { create } = require("../models/Product.model");
 const ProductModel = require("../models/Product.model");
 const mercadopago = require("../configs/mercadopago");
 
@@ -81,7 +80,7 @@ module.exports = {
 
     const { imagesURL } = await ProductModel.findById(productId);
     let updateObj;
-    // Si ingresa imágen nueva
+    // Si ingresa imagen nueva
     if (req.file) {
       let newImage = req.file.path;
       if (imagesURL[0].includes("https://aqt.cl/wp-content")) {
@@ -115,5 +114,14 @@ module.exports = {
     await ProductModel.findByIdAndUpdate(productId, updateObj, { new: true });
 
     res.redirect("/products");
+  },
+
+  async showMyProducts(req, res) {
+    const products = await ProductModel.find({ ownerID: req.user._id });
+    if (!products)
+      return res.render("products/myProducts", {
+        errorMessage: "No tienes productos aún :(",
+      });
+    return res.render("products/myProducts", { products });
   },
 };

@@ -1,4 +1,4 @@
-<h1>Carrito de Compras</h1>
+<h1>Productos Reservados</h1>
 {{#each cartItems}}
 <h3>{{productId.name}}</h3>
 {{#each productId.imagesURL}}
@@ -7,10 +7,14 @@
 <small>{{productId.category}}</small>
 <p>{{quantity}}</p>
 <p>Subtotal: {{subtotal}}</p>
-{{!-- boton para eliminar elemento según su índice --}}
 <form action="/cart/deleteItem" method="POST">
-<input type="number" name="indx" value="{{indx}}" hidden>
+<input type="number" name= value="{{indx}}" hidden>
 <button type="submit">Delete</button>
 </form>
 <hr>
 {{/each}}
+<form method="POST" action="/cart/bought">
+  <script src="https://www.mercadopago.com.co/integrations/v1/web-payment-checkout.js"
+    data-preference-id='{{preferenceId}}' data-button-label="Alquilar">
+    </script>
+</form>

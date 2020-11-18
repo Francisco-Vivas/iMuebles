@@ -1,3 +1,4 @@
+const mercadopago = require("mercadopago");
 const CartModel = require("../models/Cart.model");
 const ProductModel = require("../models/Product.model");
 const User = require("../models/User");
@@ -16,11 +17,36 @@ module.exports = {
       return {
         productId,
         quantity: cart.quantity[indx],
-        subtotal: cart.quantity[indx] * productId.price,
+        subtotal: `$${
+          cart.quantity[indx] * Number(productId.price / 100).toFixed(2)
+        } USD`,
         indx,
       };
     });
-    res.render("cart/index", { cartItems });
+
+    const preference = {
+      items: cart.productId.map((ele, idx) => {
+        return {
+          title: ele.name,
+          unit_price: ele.price ? Number(ele.price / 100) : 0,
+          quantity: cart.quantity[idx],
+          currency_id: "USD",
+        };
+      }),
+    };
+
+    const response = await mercadopago.preferences.create(preference);
+    const preferenceId = response.body.id;
+    // mercadopago.preferences
+    //   .create(preference)
+    //   .then(function (response) {
+    //     global.id = response.body.id;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+    res.render("cart/index", { cartItems, preferenceId });
   },
 
   async addItem(req, res) {
@@ -71,5 +97,9 @@ module.exports = {
       quantity: cart.quantity,
     });
     res.redirect("/cart");
+  },
+
+  boughtCart(req, res) {
+    res.render("cart/boughtCart");
   },
 };
