@@ -18,16 +18,27 @@ module.exports = {
 
   async create(req, res) {
     const { name, description, quantity, price } = req.body;
-    let imagesURL = req.file.path;
+    let newProduct;
+    if (req.file) {
+      newProduct = {
+        name,
+        description,
+        price,
+        quantity,
+        ownerID: req.user._id,
+        imagesURL: req.file.path,
+      };
+    } else {
+      newProduct = {
+        name,
+        description,
+        price,
+        quantity,
+        ownerID: req.user._id,
+      };
+    }
 
-    await ProductModel.create({
-      name,
-      description,
-      price,
-      quantity,
-      ownerID: req.user._id,
-      imagesURL,
-    });
+    await ProductModel.create(newProduct);
     res.redirect("/products");
   },
 

@@ -1,23 +1,31 @@
+const CartModel = require("../models/Cart.model");
 const ProductModel = require("../models/Product.model");
 const User = require("../models/User");
 
-/* carritoDeCompras 
-$push = User/idUser/addcarrito/productid
-res.redirect('/carrito') */
 module.exports = {
-  async showCart(req, res) {
-    const user = await User.findById(req.user._id);
-    console.log("Populate============================================= ");
-    console.log(user.populate("carritoDeCompras.0.productId"));
-    console.log(user.populate("productId"));
+  async createNewCart() {
+    const newCart = await CartModel.create({});
+    return newCart._id;
+  },
 
-    res.render("cart/", user);
+  async showCart(req, res) {
+    const cart = await CartModel.findById(req.user.cartId).populate(
+      "productId"
+    );
+    const cartItems = cart.productId.map((productId, indx) => {
+      return {
+        productId,
+        quantity: cart.quantity[indx],
+        subtotal: cart.quantity[indx] * productId.price,
+        indx,
+      };
+    });
+    res.render("cart/index", { cartItems });
   },
 
   async addItem(req, res) {
-    const { productId, quantity } = req.body;
-    const product = await ProductModel.findById(productId);
-
+    const { productId: searchId, quantity } = req.body;
+    const product = await ProductModel.findById(searchId);
     /* Check product quantity */
     if (!product || product.quantity < 1) {
       return res.render("products/detail", {
@@ -25,35 +33,43 @@ module.exports = {
       });
     }
 
-    const user = await User.findById(req.user._id);
-    /* Update quantity if it's already in the cart */
-    let isInTheCart = false;
-    if (user.carritoDeCompras) {
-      user.carritoDeCompras.map((ele) => {
-        if (String(ele.productId) === String(productId)) {
-          ele.quantity += Number(quantity);
-          isInTheCart = true;
-        }
-      });
-    }
+    const cart = await CartModel.findById(req.user.cartId);
 
-    /* Push to the cart if the value isn't there*/
+    const user = await User.findById(req.user._id);
+
+    /* UPDATE CART VALUES ==========================*/
+    let isInTheCart = cart.productId.indexOf(searchId) >= 0 ? true : false;
     if (isInTheCart) {
-      await User.findByIdAndUpdate(req.user._id, {
-        carritoDeCompras: user.carritoDeCompras,
+      const modifiedIndex = cart.productId.indexOf(searchId);
+
+      cart.quantity[modifiedIndex] += Number(quantity);
+      await CartModel.findByIdAndUpdate(req.user.cartId, {
+        ...cart,
       });
     } else {
-      await User.findByIdAndUpdate(req.user._id, {
-        $push: { carritoDeCompras: { productId, quantity } },
+      await CartModel.findByIdAndUpdate(req.user.cartId, {
+        $push: { productId: searchId, quantity },
       });
     }
 
-    /* Update Product Values */
-    product.quantity -= quantity;
-    await ProductModel.findByIdAndUpdate(productId, {
-      quantity: product.quantity,
-    });
+    /* UPDATE PRODUCT QUANTITIES ===================*/
+    product.quantity -= Number(quantity);
+    await ProductModel.findByIdAndUpdate(searchId, product);
 
+    res.redirect("/cart");
+  },
+
+  async deleteItem(req, res) {
+    const { indx } = req.body;
+    const cart = await CartModel.findById(req.user.cartId);
+
+    cart.productId.splice(indx, 1);
+    cart.quantity.splice(indx, 1);
+
+    await CartModel.findByIdAndUpdate(req.user.cartId, {
+      productId: cart.productId,
+      quantity: cart.quantity,
+    });
     res.redirect("/cart");
   },
 };

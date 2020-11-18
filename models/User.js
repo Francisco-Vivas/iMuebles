@@ -8,17 +8,10 @@ const userSchema = new Schema(
       unique: true,
       required: true,
     },
-    carritoDeCompras: [
-      {
-        productId: {
-          type: Schema.Types.ObjectId,
-          ref: "Product",
-        },
-        quantity: {
-          type: Number,
-        },
-      },
-    ],
+    cartId: {
+      type: Schema.Types.ObjectId,
+      ref: "Cart",
+    },
     username: String,
     password: String,
     role: {

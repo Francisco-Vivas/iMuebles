@@ -1,7 +1,16 @@
 <h1>Carrito de Compras</h1>
-{{#each carritoDeCompras}}
-<p>{{productId}}</p>
+{{#each cartItems}}
+<h3>{{productId.name}}</h3>
+{{#each productId.imagesURL}}
+<img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
+{{/each}}
+<small>{{productId.category}}</small>
 <p>{{quantity}}</p>
-<form action="post"></form>
+<p>Subtotal: {{subtotal}}</p>
+{{!-- boton para eliminar elemento según su índice --}}
+<form action="/cart/deleteItem" method="POST">
+<input type="number" name="indx" value="{{indx}}" hidden>
+<button type="submit">Delete</button>
+</form>
 <hr>
 {{/each}}
