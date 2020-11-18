@@ -1,5 +1,4 @@
 const mercadopago = require("../configs/mercadopago");
-const { findById } = require("../models/Cart.model");
 const CartModel = require("../models/Cart.model");
 const ProductModel = require("../models/Product.model");
 const User = require("../models/User");
@@ -119,20 +118,21 @@ module.exports = {
     console.log(
       "FINALIZANDO COMPRA ==============================================================="
     );
-    const cart = await findById(req.user.cartId);
-    console.log(cart.date);
-    cart.date = new Date();
-    console.log(cart.date);
+    // Save date in the cart
+    const cart = await CartModel.findById(req.user.cartId);
+    cart.buy_date = new Date();
     cart.markModified("date");
     await cart.save();
 
-    console.log(cart.date);
-    // // !Enviar aquí correo de confirmación de productos.
+    // !Enviar aquí correo de confirmación de productos.
 
-    // const newCartId = await this.createNewCart();
-    // const user = await User.findById(req.user._id);
-    // user.cartId = newCartId;
-    // req.user.cartId = newCartId;
-    // res.render("cart/boughtCart");
+    // New user cart
+    const { _id: newCartId } = await CartModel.create({});
+    const user = await User.findById(req.user._id);
+    user.cartId = newCartId;
+    req.user.cartId = newCartId;
+    await user.save();
+
+    res.render("cart/boughtCart");
   },
 };

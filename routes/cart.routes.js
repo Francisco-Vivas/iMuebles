@@ -12,5 +12,6 @@ router.get("/", isAuth, showCart);
 router.post("/addItem", isAuth, addItem);
 router.post("/deleteItem", isAuth, deleteItem);
 router.post("/bought", isAuth, boughtCart);
+router.post("/test", isAuth, boughtCart);
 
 module.exports = router;
