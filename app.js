@@ -97,4 +97,10 @@ app.use("/products", productRoutes);
 const cartRoutes = require("./routes/cart.routes");
 app.use("/cart", cartRoutes);
 
+const searchRoutes = require("./routes/search.routes");
+app.use("/search", searchRoutes);
+
+const commentRoutes = require("./routes/comment.routes");
+app.use("/comments", commentRoutes);
+
 module.exports = app;

@@ -1,0 +1,22 @@
+<h1>Resultados de</h1>
+<h3>{{searchString}}</h3>
+<br>
+{{#if errorMessage}}
+<p style="color: crimson">{{errorMessage}}</p>
+{{/if}}
+
+{{#each products}}
+{{#if quantity}}
+<h3>{{name}}</h3>
+{{#each imagesURL}}
+<img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
+{{/each}}
+<small>{{category}}</small>
+<p><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></p>
+
+
+
+<a href="/products/{{_id}}">Details</a>
+<hr>
+{{/if}}
+{{/each}}
