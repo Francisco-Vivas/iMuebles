@@ -20,6 +20,8 @@ exports.sendEmail = (name, email, subject, message) => {
         <h1>${email}</h1>
         
         <b>${message}</b>`
+
+        
     })
 }
 
