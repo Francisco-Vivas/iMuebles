@@ -42,7 +42,7 @@ exports.advanceSearch = async (req, res) => {
       }
     : { $ne: false };
   const category = section ? section : { $ne: "" };
-  const minPrice = minP ? parseInt(minP.split(".").join("")) : 1; // !Se obtiene por 1.00 USD, 100 de valor
+  const minPrice = minP ? parseInt(minP.split(".").join("")) : 1; // !Se obtiene por 1.00 USD, 100 de valorz
   const maxPrice = maxP
     ? parseInt(maxP.split(".").join(""))
     : 999999999999999999999999;

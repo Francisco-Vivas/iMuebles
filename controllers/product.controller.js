@@ -1,5 +1,6 @@
 const ProductModel = require("../models/Product.model");
 const mercadopago = require("../configs/mercadopago");
+const CommentModel = require("../models/Comment.model");
 
 exports.list = async (req, res) => {
   let products = await ProductModel.find();
@@ -61,7 +62,13 @@ exports.showDetails = (req, res) => {
         product.canEdit = true;
       }
       product.formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
-      return res.render("products/detail", product);
+
+      CommentModel.find({ productId: productId })
+        .populate("authorId")
+        .then((comments) => {
+          console.log(comments);
+          return res.render("products/detail", { ...product._doc, comments });
+        });
     })
     .catch(() =>
       res.render("products/detail", {
