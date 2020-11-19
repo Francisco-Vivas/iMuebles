@@ -11,7 +11,7 @@ let transporter = nodemailer.createTransport({
 
 exports.sendEmail = (name, email, subject, message) => {
     return transporter.sendMail({
-        from: '"iMuebles" <karenrothc@gmail.com>',
+        from: '"iMuebles" <imuebles.noreply@gmail.com>',
         to: email, //puede ser más de uno pero necesitamos ponerlos dentro de un array
         subject: subject,
         text: message,
