@@ -3,152 +3,145 @@ const CartModel = require("../models/Cart.model");
 const ProductModel = require("../models/Product.model");
 const User = require("../models/User");
 
-module.exports = {
-  async createNewCart() {
-    const newCart = await CartModel.create({});
-    return newCart._id;
-  },
+exports.createNewCart = async () => {
+  const newCart = await CartModel.create({});
+  return newCart._id;
+};
 
-  async showCart(req, res) {
-    const cart = await CartModel.findById(req.user.cartId).populate(
-      "productId"
-    );
+exports.showCart = async (req, res) => {
+  const cart = await CartModel.findById(req.user.cartId).populate("productId");
 
-    let totalPrice = 0;
-    const cartItems = cart.productId.map((productId, indx) => {
-      let subtotalValue =
-        cart.quantity[indx] * Number(productId.price / 100).toFixed(2);
-      totalPrice += subtotalValue;
-      return {
-        productId,
-        quantity: cart.quantity[indx],
-        subtotal: `$${(subtotalValue / 100).toFixed(2)} USD`,
-        indx,
-      };
-    });
-
-    if (!cartItems.length) {
-      return res.render("cart/index", {
-        errorMessage: "Aún no tienes nada en tu carrito. Intenta añadir algo.",
-      });
-    }
-
-    const productoAEnviar = cart.productId.map((ele, idx) => {
-      return {
-        id: ele._id,
-        title: ele.name,
-        description: ele.description,
-        unit_price: Number(ele.price / 100),
-        quantity: cart.quantity[idx],
-        currency_id: "USD",
-      };
-    });
-    // TODO: REVISAR PRODUCTOAENVIAR ============0*/
-    const preference = {
-      items: productoAEnviar,
+  let totalPrice = 0;
+  const cartItems = cart.productId.map((productId, indx) => {
+    let subtotalValue =
+      cart.quantity[indx] * Number(productId.price / 100).toFixed(2);
+    totalPrice += subtotalValue;
+    return {
+      productId,
+      quantity: cart.quantity[indx],
+      subtotal: `$${(subtotalValue / 100).toFixed(2)} USD`,
+      indx,
     };
+  });
 
-    // const preference = {
-    //   items: [
-    //     {
-    //       title: cart.productId[0].name,
-    //       unit_price: Number(cart.productId[0].price / 100),
-    //       currency_id: "USD",
-    //       quantity: 1,
-    //     },
-    //   ],
-    //   notification_url:
-    //     "https://webhook.site/88151d93-fd67-40d5-87f1-46b71cf8cae8",
-    // };
-
-    console.log(preference);
-    const response = await mercadopago.preferences.create(preference);
-    const preferenceId = response.body.id;
-
-    res.render("cart/index", {
-      cartItems,
-      preferenceId,
-      totalPrice: `$${(totalPrice / 100).toFixed(2)} USD`,
+  if (!cartItems.length) {
+    return res.render("cart/index", {
+      errorMessage: "Aún no tienes nada en tu carrito. Intenta añadir algo.",
     });
-  },
+  }
 
-  async addItem(req, res) {
-    const { productId: searchId, quantity } = req.body;
-    const product = await ProductModel.findById(searchId);
-    /* Check product quantity */
-    if (!product || product.quantity < 1) {
-      return res.render("products/detail", {
-        errorMessage: "No hay unidades disponibles :(.",
-      });
-    }
+  const productoAEnviar = cart.productId.map((ele, idx) => {
+    return {
+      id: ele._id,
+      title: ele.name,
+      description: ele.description,
+      unit_price: Number(ele.price / 100),
+      quantity: cart.quantity[idx],
+      currency_id: "USD",
+    };
+  });
+  // TODO: REVISAR PRODUCTOAENVIAR ============0*/
+  const preference = {
+    items: productoAEnviar,
+  };
 
-    const cart = await CartModel.findById(req.user.cartId);
-    const user = await User.findById(req.user._id);
+  // const preference = {
+  //   items: [
+  //     {
+  //       title: cart.productId[0].name,
+  //       unit_price: Number(cart.productId[0].price / 100),
+  //       currency_id: "USD",
+  //       quantity: 1,
+  //     },
+  //   ],
+  //   notification_url:
+  //     "https://webhook.site/88151d93-fd67-40d5-87f1-46b71cf8cae8",
+  // };
 
-    /* UPDATE CART VALUES ==========================*/
-    const isInTheCart = cart.productId.indexOf(searchId) >= 0 ? true : false;
-    if (isInTheCart) {
-      const modifiedIndex = cart.productId.indexOf(searchId);
+  console.log(preference);
+  const response = await mercadopago.preferences.create(preference);
+  const preferenceId = response.body.id;
 
-      cart.quantity[modifiedIndex] += Number(quantity);
-      await CartModel.findByIdAndUpdate(req.user.cartId, {
-        ...cart,
-      });
-    } else {
-      await CartModel.findByIdAndUpdate(req.user.cartId, {
-        $push: { productId: searchId, quantity },
-      });
-    }
+  res.render("cart/index", {
+    cartItems,
+    preferenceId,
+    totalPrice: `$${(totalPrice / 100).toFixed(2)} USD`,
+  });
+};
 
-    /* UPDATE PRODUCT QUANTITIES ===================*/
-    product.quantity -= Number(quantity);
-    await ProductModel.findByIdAndUpdate(searchId, product);
+exports.addItem = async (req, res) => {
+  const { productId: searchId, quantity } = req.body;
+  const product = await ProductModel.findById(searchId);
+  /* Check product quantity */
+  if (!product || product.quantity < 1) {
+    return res.render("products/detail", {
+      errorMessage: "No hay unidades disponibles :(.",
+    });
+  }
 
-    res.redirect("/cart");
-  },
+  const cart = await CartModel.findById(req.user.cartId);
+  const user = await User.findById(req.user._id);
 
-  async deleteItem(req, res) {
-    const { indx } = req.body;
-    const cart = await CartModel.findById(req.user.cartId);
-    console.log(indx);
-    console.log(cart.productId);
-    console.log(cart.productId[indx]);
-    const product = await ProductModel.findById(cart.productId[indx]);
+  /* UPDATE CART VALUES ==========================*/
+  const isInTheCart = cart.productId.indexOf(searchId) >= 0 ? true : false;
+  if (isInTheCart) {
+    const modifiedIndex = cart.productId.indexOf(searchId);
 
-    product.quantity += Number(cart.quantity[indx]);
-    product.save();
-
-    cart.productId.splice(indx, 1);
-    cart.quantity.splice(indx, 1);
-
+    cart.quantity[modifiedIndex] += Number(quantity);
     await CartModel.findByIdAndUpdate(req.user.cartId, {
-      productId: cart.productId,
-      quantity: cart.quantity,
+      ...cart,
     });
-    res.redirect("/cart");
-  },
+  } else {
+    await CartModel.findByIdAndUpdate(req.user.cartId, {
+      $push: { productId: searchId, quantity },
+    });
+  }
 
-  async boughtCart(req, res) {
-    // Almacenar el Id de MercadoPago { data.id, fecha y userId }
-    // TODO: Crear un nuevo carro y almacenar el nuevo valor del cartId en el usuario ( sesión y dB )
-    console.log(
-      "FINALIZANDO COMPRA ==============================================================="
-    );
-    // Save date in the cart
-    const cart = await CartModel.findById(req.user.cartId);
-    cart.buy_date = new Date();
-    cart.markModified("date");
-    await cart.save();
+  /* UPDATE PRODUCT QUANTITIES ===================*/
+  product.quantity -= Number(quantity);
+  await ProductModel.findByIdAndUpdate(searchId, product);
 
-    // !Enviar aquí correo de confirmación de productos.
+  res.redirect("/cart");
+};
 
-    // New user cart
-    const { _id: newCartId } = await CartModel.create({});
-    const user = await User.findById(req.user._id);
-    user.cartId = newCartId;
-    req.user.cartId = newCartId;
-    await user.save();
+exports.deleteItem = async (req, res) => {
+  const { indx } = req.body;
+  const cart = await CartModel.findById(req.user.cartId);
+  console.log(indx);
+  console.log(cart.productId);
+  console.log(cart.productId[indx]);
+  const product = await ProductModel.findById(cart.productId[indx]);
 
-    res.render("cart/boughtCart");
-  },
+  product.quantity += Number(cart.quantity[indx]);
+  product.save();
+
+  cart.productId.splice(indx, 1);
+  cart.quantity.splice(indx, 1);
+
+  await CartModel.findByIdAndUpdate(req.user.cartId, {
+    productId: cart.productId,
+    quantity: cart.quantity,
+  });
+  res.redirect("/cart");
+};
+
+exports.boughtCart = async (req, res) => {
+  //// Almacenar el Id de MercadoPago { data.id, fecha y userId }
+
+  // Save date in the cart
+  const cart = await CartModel.findById(req.user.cartId);
+  cart.buy_date = new Date();
+  cart.markModified("date");
+  await cart.save();
+
+  // !Enviar aquí correo de confirmación de productos.
+
+  // New user cart
+  const { _id: newCartId } = await CartModel.create({});
+  const user = await User.findById(req.user._id);
+  user.cartId = newCartId;
+  req.user.cartId = newCartId;
+  await user.save();
+
+  res.render("cart/boughtCart");
 };

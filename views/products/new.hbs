@@ -1,9 +1,10 @@
 <h1>New Product</h1>
 <form action="/products/new" method="post" enctype="multipart/form-data">
-  <input type="text" name="name" id="name" placeholder="name"> <br>
+  <input type="text" name="name" id="name" placeholder="name" required> <br>
   <input type="text" name="description" id="description" placeholder="description"> <br>
   <input type="file" name="imagesURL" id="imagesURL"> <br>
-  <input type="number" name="quantity" id="quantity" placeholder="quantity"> <br>
+  <input type="number" name="quantity" id="quantity" placeholder="quantity" minlength="1" required> <br>
+  <input type="text" name="price" id="priceProducts" placeholder="price" pattern="^[1-9]\d*.[0-9]\d*" minlength="1" required> <br>
   <label for="category">Categoría</label>
   <select name="category" id="category">
     <option value="Sin Categoría">Sin Categoría</option>
@@ -32,6 +33,5 @@
     <option value="Repisas de Oficina">Repisas de Oficina</option>
     <option value="Estaciones de trabajo">Estaciones de trabajo</option>  
   </select> <br>
-  <input type="number" name="price" id="price" placeholder="price" min="1"> <br>
   <button type="submit">Add new product</button>
 </form>

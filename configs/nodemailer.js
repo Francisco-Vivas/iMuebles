@@ -1,16 +1,15 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require("nodemailer");
 
 let transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS
-    }
+  service: "Gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
 });
 
-
 exports.sendEmail = (name, email, subject, message) => {
-    return transporter.sendMail({
+  return transporter.sendMail({
         from: '"iMuebles" <imuebles.noreply@gmail.com>',
         to: email, //puede ser más de uno pero necesitamos ponerlos dentro de un array
         subject: subject,
@@ -24,5 +23,3 @@ exports.sendEmail = (name, email, subject, message) => {
         
     })
 }
-
-
