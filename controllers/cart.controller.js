@@ -3,12 +3,7 @@ const CartModel = require("../models/Cart.model");
 const ProductModel = require("../models/Product.model");
 const User = require("../models/User");
 
-exports.createNewCart = async () => {
-  const newCart = await CartModel.create({});
-  return newCart._id;
-};
-
-exports.showCart = async (req, res) => {
+exports.getCartItems = async (req, res) => {
   const cart = await CartModel.findById(req.user.cartId).populate("productId");
 
   let totalPrice = 0;
@@ -23,6 +18,17 @@ exports.showCart = async (req, res) => {
       indx,
     };
   });
+
+  return { cart, cartItems, totalPrice };
+};
+
+exports.createNewCart = async () => {
+  const newCart = await CartModel.create({});
+  return newCart._id;
+};
+
+exports.showCart = async (req, res) => {
+  const { cart, cartItems, totalPrice } = await this.getCartItems(req, res);
 
   if (!cartItems.length) {
     return res.render("cart/index", {

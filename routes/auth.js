@@ -7,11 +7,14 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 //configs
-const {sendEmail} = require('../configs/nodemailer');
+const { sendBienvenida } = require("../configs/nodemailer");
 
 //controllers
 const { googleInit, googleCb } = require("../controllers/google.controller");
-const {facebookInit, facebookCb} = require ("../controllers/facebook.controller")
+const {
+  facebookInit,
+  facebookCb,
+} = require("../controllers/facebook.controller");
 const { createNewCart } = require("../controllers/cart.controller");
 
 const bcryptSalt = 10;
@@ -61,11 +64,11 @@ router.post("/signup", (req, res, next) => {
       email,
       password: hashPass,
     });
-  
+
     newUser
       .save()
       .then(() => {
-        sendEmail(newUser.username, newUser.email, 'Bienvenido a iMuebles', 'Gracias por unirte a nuestra familia')
+        sendBienvenida(newUser);
         res.redirect("/");
       })
       .catch((err) => {
@@ -79,10 +82,10 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/google", googleInit)
-router.get("/google/callback", googleCb)
+router.get("/google", googleInit);
+router.get("/google/callback", googleCb);
 
-router.get('/facebook', facebookInit)
-router.get('/facebook/callback', facebookCb)
+router.get("/facebook", facebookInit);
+router.get("/facebook/callback", facebookCb);
 
 module.exports = router;
