@@ -6,6 +6,8 @@ const {
   compradorPage,
   vendedorPage,
   usuarioPage,
+  vendedorPage1,
+  compradorPage1,
   profilePage,
 } = require("../controllers/user");
 
@@ -16,18 +18,32 @@ const { isAuth, isNotAuth, checkRoles } = require("../middlewares");
 
 router.get("/profile", isAuth, profilePage);
 
-router.get(
-  "/comprador",
+//patch sirve para cambiar o parchar
+
+router.post(
+  "/checkcomprador",
   isAuth,
-  checkRoles(["COMPRADOR", "ADMIN"]),
+  compradorPage1
+);
+
+router.get(
+  "/comprador1",
+  isAuth,
   compradorPage
 );
+
+router.post(
+  "/checkvendedor",
+  // isAuth,
+  vendedorPage1
+);
+
 router.get(
-  "/vendedor",
+  "/vendedor1",
   isAuth,
-  checkRoles(["VENDEDOR", "ADMIN"]),
   vendedorPage
 );
-router.get("/usuario", usuarioPage);
+
+// router.get("/usuario", usuarioPage);
 
 module.exports = router;
