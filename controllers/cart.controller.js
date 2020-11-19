@@ -51,19 +51,6 @@ exports.showCart = async (req, res) => {
     items: productoAEnviar,
   };
 
-  // const preference = {
-  //   items: [
-  //     {
-  //       title: cart.productId[0].name,
-  //       unit_price: Number(cart.productId[0].price / 100),
-  //       currency_id: "USD",
-  //       quantity: 1,
-  //     },
-  //   ],
-  //   notification_url:
-  //     "https://webhook.site/88151d93-fd67-40d5-87f1-46b71cf8cae8",
-  // };
-
   console.log(preference);
   const response = await mercadopago.preferences.create(preference);
   const preferenceId = response.body.id;

@@ -13,11 +13,33 @@ const { isAuth, isNotAuth, checkRoles } = require("../middlewares");
 const router = require("express").Router();
 
 router.get("/", list);
-router.get("/new", showFormNew);
-router.post("/new", fileUploader.single("imagesURL"), create);
-router.get("/myProducts", isAuth, showMyProducts);
+router.get("/new", isAuth, checkRoles(["VENDEDOR", "ADMIN"]), showFormNew);
+router.post(
+  "/new",
+  fileUploader.single("imagesURL"),
+  isAuth,
+  checkRoles(["VENDEDOR", "ADMIN"]),
+  create
+);
+router.get(
+  "/myProducts",
+  isAuth,
+  checkRoles(["VENDEDOR", "ADMIN"]),
+  showMyProducts
+);
 router.get("/:productId", showDetails);
-router.get("/:productId/edit", editProductView);
-router.post("/:productId/edit", fileUploader.single("imagesURL"), editProduct);
+router.get(
+  "/:productId/edit",
+  isAuth,
+  checkRoles(["VENDEDOR", "ADMIN"]),
+  editProductView
+);
+router.post(
+  "/:productId/edit",
+  fileUploader.single("imagesURL"),
+  isAuth,
+  checkRoles(["VENDEDOR", "ADMIN"]),
+  editProduct
+);
 
 module.exports = router;

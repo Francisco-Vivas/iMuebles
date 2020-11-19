@@ -1,8 +1,23 @@
+// titulo-barra-usuario: #e5c5b5  fondo-modal: #f4d9c6 boton-principal: #C0DECE boton-secundario:  #c4c4c4
+// titulo-barra-vendedor: #94b4a4 fondo-modal: #C0DECE boton-principal: #f4d9c6 boton-secundario:  #c4c4c4
+//
+// background: #f2f6f5
+
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Montserrat&display=swap");
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Montserrat", Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Assistant", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }

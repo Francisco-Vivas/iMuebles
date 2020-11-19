@@ -3,9 +3,14 @@ const {
   createComment,
   listPosts,
 } = require("../controllers/comment.controller");
-const { isAuth } = require("../middlewares");
+const { isAuth, checkRoles } = require("../middlewares");
 
-router.get("/", isAuth, listPosts);
-router.post("/create", isAuth, createComment);
+router.get("/", isAuth, checkRoles(["COMPRADOR", "ADMIN"]), listPosts);
+router.post(
+  "/create",
+  isAuth,
+  checkRoles(["COMPRADOR", "ADMIN"]),
+  createComment
+);
 
 module.exports = router;

@@ -28,6 +28,10 @@ const userSchema = new Schema(
     facebookID: String,
     googleID: String,
     microsoftID: String,
+    isComprador: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: {

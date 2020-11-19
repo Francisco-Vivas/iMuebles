@@ -10,8 +10,20 @@ const { isAuth, isNotAuth, checkRoles } = require("../middlewares");
 const router = require("express").Router();
 
 router.get("/", isAuth, showCart);
-router.post("/addItem", isAuth, addItem);
-router.post("/deleteItem", isAuth, deleteItem);
-router.post("/bought", isAuth, sendFactura, boughtCart);
+
+router.post("/addItem", isAuth, checkRoles(["COMPRADOR", "ADMIN"]), addItem);
+router.post(
+  "/deleteItem",
+  isAuth,
+  checkRoles(["COMPRADOR", "ADMIN"]),
+  deleteItem
+);
+router.post(
+  "/bought",
+  isAuth,
+  checkRoles(["COMPRADOR", "ADMIN"]),
+  sendFactura,
+  boughtCart
+);
 
 module.exports = router;
