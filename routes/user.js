@@ -3,12 +3,9 @@ const router = express.Router();
 
 //controllers
 const {
-  compradorPage,
-  vendedorPage,
-  usuarioPage,
-  vendedorPage1,
-  compradorPage1,
   profilePage,
+  rolAComprador,
+  rolAVendedor,
 } = require("../controllers/user");
 
 /* Middlewares */
@@ -20,30 +17,7 @@ router.get("/profile", isAuth, profilePage);
 
 //patch sirve para cambiar o parchar
 
-router.post(
-  "/checkcomprador",
-  isAuth,
-  compradorPage1
-);
-
-router.get(
-  "/comprador1",
-  isAuth,
-  compradorPage
-);
-
-router.post(
-  "/checkvendedor",
-  // isAuth,
-  vendedorPage1
-);
-
-router.get(
-  "/vendedor1",
-  isAuth,
-  vendedorPage
-);
-
-// router.get("/usuario", usuarioPage);
+router.post("/checkcomprador", isAuth, rolAComprador);
+router.post("/checkvendedor", isAuth, rolAVendedor);
 
 module.exports = router;
