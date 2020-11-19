@@ -11,8 +11,8 @@
   <input type="file" name="imagesURL" id="imagesURL"> <br>
   <br>
 
-  <input type="number" name="quantity" id="quantity" value="{{quantity}}"> <br>
-  <input type="number" name="price" id="price" value="{{price}}"> <br>
+  <input type="number" name="quantity" id="quantity" value="{{quantity}}" minlength="1" required> <br>
+  <input type="text" name="price" id="priceProducts" value="{{price}}" pattern="^[1-9]\d*.[0-9]\d*" minlength="1" required> <br>
   <label for="category">Categoría</label>
   <select name="category" id="category">
     <option value="{{category}}">{{category}}</option>

@@ -1,5 +1,4 @@
 {{#if error}}
-<h1>I can't find it :c</h1>
 <p style="color: crimson">{{error}}</p>
 <p>But you can create it! <a href="/products/new">Click here.</a></p>
 
@@ -15,7 +14,53 @@
 <small><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></small>
 <p>{{description}}</p>
 <hr>
-{{#if _id}}
+<form action="/cart/addItem" method="post">
+<input type="text" value="{{_id}}" name="productId" hidden>
+<label for="number">Cantidad:</label> <br>
+<input type="number" name="quantity" max="{{quantity}}" min="0" value="1"> <br>
+<button type="submit">Reservar</button>
+</form>
+
+{{#if canEdit}}
+
 <a href="/products/{{_id}}/edit">Edit it!</a>
 {{/if}}
+<br>
+<hr>
+{{#if comments}}
+<br>
+<hr>
+<h3>Comments</h3>
+{{#each comments}}
+<hr>
+<div style="display: flex; flex-direction:column; justify-content:center">
+  <h3>{{authorId.username}} dijo:</h3>
+  <p style="padding-left: 1.5rem;">{{ content }}</p>
+</div>
+{{/each}}
+{{else}}
+<p>No comments.</p>
+{{/if}}
+{{#if user}}
+<br>
+<hr>
+<form action="/comments/create" method="POST" >
+  <h3>Nuevo Comentario</h3>
+
+  {{!-- AÑADIR CALIFICACIÓN AQUÍ --}}
+
+  <input type="text" id="input-content" name="content" placeholder="Comment!" />
+  <input type="text" id="input-content" name="idProduct" placeholder="Comment!" hidden value="{{_id}}" />
+
+  <button type="submit">Comentar</button>
+
+  {{#if errorMessage}}
+  <p class="error">{{errorMessage}}</p>
+  {{/if}}
+</form>
+{{else}}
+<p>You have to be logged to comment.</p>
+{{/if}}
+
+
 {{/if}}

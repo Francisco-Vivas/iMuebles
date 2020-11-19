@@ -4,7 +4,8 @@ const User = require('../models/User');
 
 require('./serializers');
 require('./localStrategy');
-require('./googleStrategy')
+require('./googleStrategy');
+require('./facebookStragety')
 
 module.exports = (app)  => {
   app.use(passport.initialize());

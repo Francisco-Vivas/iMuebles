@@ -2,18 +2,32 @@ const { Schema, model } = require("mongoose");
 
 const productSchema = new Schema(
   {
-    name: String,
-    description: String,
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
     imagesURL: {
       type: [String],
       default: "https://aqt.cl/wp-content/uploads/2020/09/sin_imagen.jpg",
     },
-    price: Number,
+    price: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
     ownerID: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    quantity: Number,
+    quantity: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
     category: {
       type: String,
       enum: [

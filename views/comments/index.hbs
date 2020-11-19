@@ -1,0 +1,12 @@
+<h1>Mis Comentarios</h1>
+{{#if comments}}
+<br>
+<hr>
+{{#each comments}}
+
+<p style="padding-left: 1.5rem;">{{ content }}</p>
+<p>En {{productId.name}} | <small><a href="/products/{{productId._id}}">Ir al producto</a></small></p>
+{{/each}}
+{{else}}
+<p>No has hecho comentarios.</p>
+{{/if}}

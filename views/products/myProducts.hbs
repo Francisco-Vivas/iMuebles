@@ -1,21 +1,19 @@
-<h1>Products</h1>
+<h1>Mis Productos</h1>
 <br>
 {{#if errorMessage}}
 <p style="color: crimson">{{errorMessage}}</p>
 {{/if}}
 
 {{#each products}}
-{{#if quantity}}
 <h3>{{name}}</h3>
 {{#each imagesURL}}
 <img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
 {{/each}}
 <small>{{category}}</small>
-<p><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></p>
+<p><span>${{price}}</span> USD c/u : Disponible(s) - <span>{{quantity}}</span></p>
 
 
 
 <a href="/products/{{_id}}">Details</a>
 <hr>
-{{/if}}
 {{/each}}

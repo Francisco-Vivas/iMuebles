@@ -1,7 +1,10 @@
 <h2>Signup</h2>
 
 <form action="/auth/signup" method="POST" id="form-container">
- <label for="email">Email</label>
+  <label for="username">Nombre y apellido </label>
+  <input id="username" type="username" name="username" placeholder="Juan Perez">
+
+  <label for="email">Email</label>
   <input id="email" type="text" name="email" placeholder="JonSnow@example.com">
 
   <br><br>
@@ -22,4 +25,7 @@
     <a href="/auth/login">Login</a>
   </p>
   <a href="/auth/google">or Login with Google</a>
+  <br>
+  <a href="/auth/facebook">Login with Facebook</a>
+
 </form>

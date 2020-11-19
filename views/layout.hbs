@@ -11,11 +11,55 @@
 
   <nav>
     <a href="/">Home</a>
-    {{!-- SOLO POR DESARROLLO - DEFINIR ESTILO Y QUITAR ESTE LINK --}}
     <a href="/products">Products</a> 
+
+    {{!-- BUSQUEDA BÁSICA --}}
+    <form action="/search/" method="get">
+    <input type="text" name="searchProductBasic" id="searchProductBasic" placeholder="Busca aquí">
+    <button type="submit">Buscar</button>
+    </form>
+    {{!-- BUSQUEDA AVANZADA --}}
+    <form action="/search/advance/" method="get">
+    <input type="text" name="searchProductAdvance" id="searchProductAdvance" placeholder="Palabras Claves">
+    <select name="category" id="category">
+    <option value=""> ————— </option>
+    <option value="Sin Categoría">Sin Categoría</option>
+    <option value="Sofás">Sofás</option>
+    <option value="Mesas">Mesas</option>
+    <option value="Sillas">Sillas</option>
+    <option value="Escritorios">Escritorios</option>
+    <option value="Armarios">Armarios</option>
+    <option value="Otomanos">Otomanos</option>
+    <option value="Mesas de Comedor">Mesas de Comedor</option>
+    <option value="Sillas de Comedor">Sillas de Comedor</option>
+    <option value="Soportes para TV">Soportes para TV</option>
+    <option value="Librerías">Librerías</option>
+    <option value="Futones">Futones</option>
+    <option value="Coffee Tables">Coffee Tables</option>
+    <option value="Taburetes">Taburetes</option>
+    <option value="Mesa de Noche">Mesa de Noche</option>
+    <option value="Mesas de Conferencias">Mesas de Conferencias</option>
+    <option value="Mesas de Entrenamiento">Mesas de Entrenamiento</option>
+    <option value="Sillas de Visitante">Sillas de Visitante</option>
+    <option value="Mesas de Oficina">Mesas de Oficina</option>
+    <option value="Sillas de Oficina">Sillas de Oficina</option>
+    <option value="Sillas Ejecutivas">Sillas Ejecutivas</option>
+    <option value="Taburetes de Oficina">Taburetes de Oficina</option>
+    <option value="Unidades de Almacenamiento de Oficina">Unidades de Almacenamiento de Oficina</option>
+    <option value="Repisas de Oficina">Repisas de Oficina</option>
+    <option value="Estaciones de trabajo">Estaciones de trabajo</option>  
+  </select>
+    <input type="text" name="minPrice" id="minPrice" placeholder="Minimum price" min="1" >
+    <input type="text" name="maxPrice" id="maxPrice" placeholder="Maximun price" min="1" >
+    <button type="submit">Buscar</button>
+    </form>
+
     {{#if user}}
-    <a href="/user/profile">Profile</a>
-    <a href="/products/new">Add New Product</a>
+    <a href="/user/profile">Perfil</a>
+    <a href="/products/new">Agregar Producto</a>
+    <a href="/products/myProducts">Mis Productos</a>
+    <a href="/comments/">Mis Comentarios</a>
+    <a href="/cart">Carrito</a>
     <a href="/auth/logout">Logout</a>
     {{else}}
     <a href="/auth/login">Login</a>
