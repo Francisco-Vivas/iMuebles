@@ -1,7 +1,11 @@
-const { searchBar } = require("../controllers/search.controller");
+const {
+  searchBar,
+  advanceSearch,
+} = require("../controllers/search.controller");
 
 const router = require("express").Router();
 
-router.post("/", searchBar);
+router.get("/advance", advanceSearch);
+router.get("/", searchBar);
 
 module.exports = router;

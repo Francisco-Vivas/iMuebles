@@ -12,8 +12,13 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Cart",
     },
-    username: String,
-    password: String,
+    username: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+    },
     role: {
       type: String,
       enum: ["ADMIN", "VENDEDOR", "COMPRADOR", "USUARIO"],
