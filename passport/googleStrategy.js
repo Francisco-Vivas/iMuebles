@@ -26,7 +26,7 @@ passport.use(
           email: profile.emails[0].value,
           googleID: profile.id,
         });
-        sendEmail(newUser.username, newUser.email, 'Bienvenido a iMuebles', 'Gracias por unirte a nuestra familia');
+        sendEmail(newUser.username, newUser.email, 'Bienvenido a iMuebles' , 'Gracias por unirte a nuestra familia');
         done(null, newUser);
       } catch (err) {
         done(err);

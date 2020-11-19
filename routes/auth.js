@@ -6,11 +6,13 @@ const User = require("../models/User");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 
+//configs
+const {sendEmail} = require('../configs/nodemailer');
+
 //controllers
 const { googleInit, googleCb } = require("../controllers/google.controller");
 const {facebookInit, facebookCb} = require ("../controllers/facebook.controller")
 const { createNewCart } = require("../controllers/cart.controller");
-
 
 const bcryptSalt = 10;
 
@@ -59,10 +61,11 @@ router.post("/signup", (req, res, next) => {
       email,
       password: hashPass,
     });
-
+  
     newUser
       .save()
       .then(() => {
+        sendEmail(newUser.username, newUser.email, 'Bienvenido a iMuebles', 'Gracias por unirte a nuestra familia')
         res.redirect("/");
       })
       .catch((err) => {
