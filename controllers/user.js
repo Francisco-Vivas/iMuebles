@@ -8,21 +8,21 @@ exports.profilePage = (req, res) => {
 };
 
 exports.rolAComprador = async (req, res) => {
-  await User.findByIdAndUpdate(req.user._id, { role: "COMPRADOR" });
+  await User.findByIdAndUpdate(req.user._id, {
+    role: "COMPRADOR",
+    isComprador: true,
+  });
   req.user.role = "COMPRADOR";
   req.user.isComprador = true;
   res.redirect("/");
 };
 
 exports.rolAVendedor = async (req, res) => {
-  await User.findByIdAndUpdate(req.user._id, { role: "VENDEDOR" });
+  await User.findByIdAndUpdate(req.user._id, {
+    role: "VENDEDOR",
+    isComprador: false,
+  });
   req.user.role = "VENDEDOR";
   req.user.isComprador = false;
   res.redirect("/");
 };
-
-// exports.usuarioPage = (req, res, next) => {
-//   if(req.user.role == 'USUARIO')
-//   return
-//   res.redirect("/");
-// };
