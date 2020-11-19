@@ -1,9 +1,8 @@
 const FacebookStrategy = require("passport-facebook");
 const passport = require("passport");
 const User = require("../models/User");
-const { sendEmail } = require('../configs/nodemailer')
+const { sendBienvenida } = require("../configs/nodemailer");
 const { createNewCart } = require("../controllers/cart.controller");
-
 
 passport.use(
   new FacebookStrategy(
@@ -24,7 +23,7 @@ passport.use(
           email: profile.emails[0].value,
           cartId,
         });
-        sendEmail(userCreated.username, userCreated.email, 'Bienvenido a iMuebles', 'Gracias por unirte a nuestra familia');
+        sendBienvenida(userCreated);
         return callback(null, userCreated);
       } else {
         callback(null, user);
