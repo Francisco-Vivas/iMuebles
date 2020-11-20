@@ -60,6 +60,7 @@ exports.showDetails = (req, res) => {
           errorMessage: "Este producto no existe.",
         });
       }
+      let canEdit;
       if (!req.user || String(product.ownerID) !== String(req.user._id)) {
         canEdit = false;
       } else {
