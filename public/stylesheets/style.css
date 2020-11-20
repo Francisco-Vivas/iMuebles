@@ -32,4 +32,15 @@ footer {
 .copy {
   background-color: #969494 !important; }
 
+button {
+  background-color: #c0dece !important;
+  border-color: #c0dece !important;
+  color: #c4c4c4;
+  border-radius: 50rem !important; }
+
+.btn-anchor {
+  background-color: #c0dece !important;
+  border-color: #c0dece !important;
+  color: #c4c4c4; }
+
 /*# sourceMappingURL=style.css.map */
