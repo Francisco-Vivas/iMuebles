@@ -8,8 +8,7 @@ exports.getCartItems = async (req, res) => {
 
   let totalPrice = 0;
   const cartItems = cart.productId.map((productId, indx) => {
-    let subtotalValue =
-      cart.quantity[indx] * Number(productId.price / 100).toFixed(2);
+    let subtotalValue = cart.quantity[indx] * productId.price;
     totalPrice += subtotalValue;
     return {
       productId,
@@ -30,7 +29,6 @@ exports.createNewCart = async () => {
 
 exports.showCart = async (req, res) => {
   const { cart, cartItems, totalPrice } = await this.getCartItems(req, res);
-
   if (!cartItems.length) {
     return res.render("cart/index", {
       errorMessage: "Aún no tienes nada en tu carrito. Intenta añadir algo.",
@@ -38,6 +36,8 @@ exports.showCart = async (req, res) => {
   }
 
   const productoAEnviar = cart.productId.map((ele, idx) => {
+    console.log(ele);
+    console.log(ele.price);
     return {
       id: ele._id,
       title: ele.name,
@@ -101,10 +101,10 @@ exports.addItem = async (req, res) => {
 exports.deleteItem = async (req, res) => {
   const { indx } = req.body;
   const cart = await CartModel.findById(req.user.cartId);
+  const product = await ProductModel.findById(cart.productId[indx]);
   console.log(indx);
   console.log(cart.productId);
   console.log(cart.productId[indx]);
-  const product = await ProductModel.findById(cart.productId[indx]);
 
   product.quantity += Number(cart.quantity[indx]);
   product.save();

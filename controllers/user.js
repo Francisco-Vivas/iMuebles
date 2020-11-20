@@ -4,7 +4,8 @@ const router = express.Router();
 const User = require("../models/User");
 
 exports.profilePage = (req, res) => {
-  res.render("profile", { user: req.user });
+  console.log(req.user);
+  res.render("profile", req.user);
 };
 
 exports.rolAComprador = async (req, res) => {

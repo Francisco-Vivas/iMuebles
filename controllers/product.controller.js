@@ -61,15 +61,14 @@ exports.showDetails = (req, res) => {
 
       let canEdit;
       if (!req.user || String(product.ownerID) !== String(req.user._id)) {
-        product.canEdit = false;
+        canEdit = false;
       } else {
-        product.canEdit = true;
+        canEdit = true;
       }
-
       const formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
       const image = product.imagesURL[0];
       const images = product.imagesURL.splice(1);
-      const isCliente = req.user.isCliente;
+      const isComprador = !req.user.isComprador;
 
       CommentModel.find({ productId: productId })
         .populate("authorId")
@@ -81,7 +80,7 @@ exports.showDetails = (req, res) => {
             image,
             images,
             canEdit,
-            isCliente,
+            isComprador,
           });
         });
     })
@@ -96,7 +95,9 @@ exports.editProductView = async (req, res) => {
   const { productId } = req.params;
 
   const product = await ProductModel.findById({ _id: productId });
-  if (product) return res.render("products/edit", product);
+  const image = product.imagesURL[0];
+  const images = product.imagesURL.splice(1);
+  if (product) return res.render("products/edit", { product, image, images });
   return res.render("products/edit", {
     errorMessage: "This product does not exist.",
   });

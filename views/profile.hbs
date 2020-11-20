@@ -1,16 +1,26 @@
-<h1 class="display-1 my-5 ml-3">Bienvenido a tu perfil {{username}}</h1>
+<div class="container">
+<h1 class="display-1 my-5 ml-3">Bienvenido a tu perfil <span class="display-4">{{username}}</span></h1>
+<hr>
+
+<h3 class="my-5 ml-3">Actualmente eres <span class="font-weight-light">{{role}}</span></h3>
+<h5>Elije una opción para cambiar tu rol.</h5>
+
+<div class="row">
+  <div class="col-6 text-center mt-4 mb-5">
+    <form  action="/user/checkvendedor" method="POST">
+      <button type="submit" class="p-2" style="color:grey" >Quiero Ofrecer</button>
+    </form>
+  </div>
+  <div class="col-6 text-center mt-4 mb-5">      
+    <form  action="/user/checkcomprador" method="POST"  >
+      <button  type="submit" class="p-2" style="color:grey" >Quiero Reservar</button>
+    </form> 
+  </div>
+</div>
 
 <hr>
-<p>¿Qué quieres hacer?</p>
-<form  action="/user/checkvendedor" method="POST">
-<button type="submit">Quiero Alquilar Productos</button>
-</form>
-<br>
-<form  action="/user/checkcomprador" method="POST"  >
-<button  type="submit">Quiero Reservar Productos</button>
-</form> 
-
-<br>
-<br>
 
 
+
+
+</div>
