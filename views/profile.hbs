@@ -1,5 +1,6 @@
 <div class="container">
-<h1 class="display-1 my-5 ml-3">Bienvenido a tu perfil <span class="display-4">{{username}}</span></h1>
+<h1 class="display-1 my-5 ml-3">Bienvenido a tu perfil </h1>
+<h2 class="display-4 ml-3">{{username}}</h2>
 <hr>
 
 <h3 class="my-5 ml-3">Actualmente eres <span class="font-weight-light">{{role}}</span></h3>
@@ -8,17 +9,41 @@
 <div class="row">
   <div class="col-6 text-center mt-4 mb-5">
     <form  action="/user/checkvendedor" method="POST">
-      <button type="submit" class="p-2" style="color:grey" >Quiero Ofrecer</button>
+      <button type="submit" class="p-3 border-0" style="color:grey" >Quiero Ofrecer</button>
     </form>
   </div>
   <div class="col-6 text-center mt-4 mb-5">      
     <form  action="/user/checkcomprador" method="POST"  >
-      <button  type="submit" class="p-2" style="color:grey" >Quiero Reservar</button>
+      <button  type="submit" class="p-3 border-0" style="color:grey" >Quiero Reservar</button>
     </form> 
   </div>
 </div>
 
 <hr>
+
+<h1 class="display-4 my-5 ml-3">Actualiza tus datos</h1>
+<hr>
+<div class="card row my-5 p-5">
+  <div class="col-12">  
+<form action="/user/profile" method="post" >
+
+  <div class="form-group">
+    <label for="name">Nombre</label>
+    <input type="text" class="form-control"  name="username" value="{{username}}" id="name" placeholder="¿Cómo te llamas?" required>
+  </div>
+  <div class="form-group">
+    <label for="description">Correo electrónico</label>
+    <input type="email" class="form-control" name="email" id="description" value="{{email}}" placeholder="¿A qué correo te podemos localizar?" required>
+  </div>
+  
+  <div class="form-group row my-4 mx-auto">
+    <div class="col-sm-10 mx-auto text-center">
+      <button type="submit" class="btn btn-primary">¡Actualiza tus datos!</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>
 
 
 

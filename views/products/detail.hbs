@@ -7,7 +7,7 @@
 {{/if}}
 
 {{#if name}}
-<div class="card mb-3" style="">
+<div class="card mb-3 py-5" style="">
   <div class="row no-gutters">
     <div class="col-md-4 m-auto">
       <div id="carouselExampleControls" class="carousel slide col-12" data-ride="carousel">
@@ -36,7 +36,7 @@
         <div class="row justify-content-between mr-2 my-2">
           <h3 class="card-title mb-3">{{description}}</h3>
           {{#if canEdit}}
-          {{#if isComprador}}
+          {{#if isVendedor}}
             <a href="/products/{{_id}}/edit" class="btn">¡Actualízalo!</a>
           {{/if}}
           {{/if}}
@@ -44,6 +44,7 @@
         <p class="card-text mb-1">Precio: {{formatedPrice}} </p>
         <small><p class="card-text">Disponibles: {{quantity}} unidades.</p></small>
         <p class="card-text mt-1"><small class="text-muted">{{productId.category}}</small></p>
+        {{#if isComprador}}
         <form action="/cart/addItem" method="post">
           <input type="text" value="{{_id}}" name="productId" hidden>
           <div class="input-group align-items-baseline">
@@ -54,6 +55,7 @@
             <button class="btn btn-secondary rounded-pill" type="submit">Reservar</button>
           </div>
         </form>
+        {{/if}}
       </div>
     </div>
   </div>

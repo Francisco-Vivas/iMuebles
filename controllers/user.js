@@ -26,3 +26,17 @@ exports.rolAVendedor = async (req, res) => {
   req.user.isComprador = false;
   res.redirect("/");
 };
+
+exports.updateData = async (req, res) => {
+  const { username, email } = req.body;
+  console.log(username);
+  await User.findByIdAndUpdate(req.user._id, { username, email });
+  console.log(req.user);
+  req.user.username = username;
+  req.user.email = email;
+  console.log({ ...req.user });
+  res.render("profile", {
+    ...req.user._doc,
+    message: "Tus datos se han actualizado satisfactoriamente.",
+  });
+};

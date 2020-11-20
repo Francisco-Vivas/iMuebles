@@ -156,13 +156,22 @@
 
   <footer>
     <div class="container">
-      <ul class="list-unstyled list-inline text-center py-4 my-0">
+      <ul class="list-unstyled list-inline text-center py-5 my-auto">
+          {{#if user}}
+          <li class="list-inline-item">
+          <h5 class="mb-1">¿Quieres leer el código fuente?</h5>
+        </li>
+        <li class="list-inline-item">
+          <a href="/signup" class="btn btn-outline-secondary rounded-pill"><h5>¡Llévame al Repositorio!</h5></a>
+        </li>
+          {{else}}
         <li class="list-inline-item">
           <h5 class="mb-1">¡Registrate ya!</h5>
         </li>
         <li class="list-inline-item">
           <a href="/signup" class="btn btn-outline-secondary rounded-pill"><h5>Sign up</h5></a>
         </li>
+          {{/if}}
     </ul>
     </div>
     <div class="text-center py-3 copy">
