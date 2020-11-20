@@ -58,7 +58,7 @@ exports.showDetails = (req, res) => {
         return res.render("products/detail", {
           errorMessage: "This product does not exist.",
         });
-      }
+
       let canEdit;
       if (!req.user || String(product.ownerID) !== String(req.user._id)) {
         product.canEdit = false;
@@ -71,11 +71,9 @@ exports.showDetails = (req, res) => {
       const images = product.imagesURL.splice(1);
       const isCliente = req.user.isCliente;
 
-
       CommentModel.find({ productId: productId })
         .populate("authorId")
         .then((comments) => {
-
           return res.render("products/detail", {
             ...product._doc,
             comments,
@@ -85,7 +83,6 @@ exports.showDetails = (req, res) => {
             canEdit,
             isCliente,
           });
-
         });
     })
     .catch(() =>
