@@ -9,7 +9,8 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Assistant", Helvetica, Arial, sans-serif; }
+  font-family: "Assistant", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.1rem !important; }
 
 h5 {
   margin: 0 !important; }
@@ -70,5 +71,17 @@ footer {
   padding: 0px 150px;
   background-image: white !important;
   margin-bottom: 50px; } */
+
+button {
+  background-color: #c0dece !important;
+  border-color: #c0dece !important;
+  color: #c4c4c4;
+  border-radius: 50rem !important; }
+
+.btn-anchor {
+  background-color: #c0dece !important;
+  border-color: #c0dece !important;
+  color: #c4c4c4; }
+
 
 /*# sourceMappingURL=style.css.map */

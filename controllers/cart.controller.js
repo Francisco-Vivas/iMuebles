@@ -16,6 +16,7 @@ exports.getCartItems = async (req, res) => {
       quantity: cart.quantity[indx],
       subtotal: `$${(subtotalValue / 100).toFixed(2)} USD`,
       indx,
+      image: productId.imagesURL[0],
     };
   });
 
