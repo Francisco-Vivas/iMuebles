@@ -39,7 +39,7 @@ exports.showCart = async (req, res) => {
     return {
       id: ele._id,
       title: ele.name,
-      description: ele.description,
+      description: ele.description.length > 254 ? ele.description.split('').splice(0,253).join('') : ele.description,
       unit_price: Number(ele.price / 100),
       quantity: cart.quantity[idx],
       currency_id: "USD",
@@ -50,7 +50,7 @@ exports.showCart = async (req, res) => {
     items: productoAEnviar,
   };
 
-  const response = await mercadopago.preferences.create(preference);
+  const response = await mercadopago.preferences.create(preference)
   const preferenceId = response.body.id;
 
   res.render("cart/index", {
