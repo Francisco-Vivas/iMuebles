@@ -71,7 +71,7 @@ router.post("/signup", (req, res, next) => {
       .save()
       .then(() => {
         sendBienvenida(newUser);
-        res.redirect("/login");
+        res.redirect("/auth/login");
       })
       .catch((err) => {
         res.render("auth/signup", { message: "Algo pasó :(" });

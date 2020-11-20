@@ -42,31 +42,31 @@
 <br>
 {{!-- Sections --}}
 <div class="container">
-<div class="my-4 px-2">
+<div class="my-4 px-2 text-center">
 <h3 class="text-center">Sillas</h3>
 <hr>
   {{#each categoryViewSillas}}
   {{#each imagesURL}}
-   <a href="/products/{{_id}}"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
+   <a href="/search/advance/?searchProductAdvance=&minPrice=&maxPrice=&category=Sillas"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
   {{/each}}
   {{/each}}
 
 </div>
-<div class="my-4 px-2">
+<div class="my-4 px-2 text-center">
   <h3 class="text-center">Escritorios</h3>
 <hr>
    {{#each categoryViewEsc}}
   {{#each imagesURL}}
-  <a href="/products/{{_id}}"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
+  <a href="/search/advance/?searchProductAdvance=&minPrice=&maxPrice=&category=Escritorios"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
   {{/each}}
   {{/each}}
 </div>
-<div class="my-4 px-2">
+<div class="my-4 px-2 text-center">
   <h3 class="text-center">Sofás</h3>
   <hr>
    {{#each categoryViewSof}}
   {{#each imagesURL}}
-  <a href="/products/{{_id}}"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
+  <a href="/search/advance/?searchProductAdvance=&minPrice=&maxPrice=&category=Sofás"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
   {{/each}}
   {{/each}}
 </div>

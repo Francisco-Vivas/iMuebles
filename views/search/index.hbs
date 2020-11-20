@@ -36,4 +36,19 @@
   {{/each}}
 </div>
 
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {{#if p}}
+    <li class="page-item">
+      <a class="page-link" href="/products/?pageNum={{p}}">Previous</a>
+    </li>
+    {{/if}}
+    {{#if n}}
+    <li class="page-item">
+      <a class="page-link" href="/products/?pageNum={{n}}">Next</a>
+    </li>
+    {{/if}}
+  </ul>
+</nav>
+
 </div>

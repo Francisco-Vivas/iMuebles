@@ -1,9 +1,20 @@
 const ProductModel = require("../models/Product.model");
 const mercadopago = require("../configs/mercadopago");
 const CommentModel = require("../models/Comment.model");
+const itemsPerPage = 9;
 
 exports.list = async (req, res) => {
-  let products = await ProductModel.find();
+  let { pageNum } = req.query;
+  pageNum = Number(pageNum) ? parseInt(pageNum) : 1;
+
+  let products = await ProductModel.find({
+    quantity: {
+      $gt: 0,
+    },
+  })
+    .skip((pageNum - 1) * itemsPerPage)
+    .limit(itemsPerPage);
+
   if (!products.length)
     return res.render("products/index", {
       errorMessage: "Wow.. such empty! Prueba añadiendo algo nuevo ;)",
@@ -13,7 +24,10 @@ exports.list = async (req, res) => {
     ele.image = ele.imagesURL[0];
   });
 
-  return res.render("products/index", { products });
+  const n = products.length < 9 ? null : pageNum + 1;
+  const p = pageNum === 1 ? null : pageNum - 1;
+
+  return res.render("products/index", { products, n, p });
 };
 
 exports.showFormNew = (req, res) => {
