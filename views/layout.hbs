@@ -15,7 +15,7 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light nav-bar-color">
-  <a class="navbar-brand ml-3" href="/"><h5 class="title-nav-bar diplay-4">iMuebles</h5></a>
+  <a class="navbar-brand ml-3" href="/"><h5 class="title-nav-bar diplay-4" style="letter-spacing: 0.1rem;">iMuebles</h5></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -38,13 +38,13 @@
         {{!-- BUSQUEDA AVANZADA --}}
         <form  action="/search/advance/" method="get" class="dropdown-menu p-4">
           <div class="form-group mb-3">
-            <label for="searchProductAdvance">Palabras Clave (USD)</label>
-             <input type="text" class="form-control" name="searchProductAdvance" id="searchProductAdvance" placeholder="Palabras Claves">
+            <label for="searchProductAdvance">Palabras Clave</label>
+             <input type="text" class="form-control" name="searchProductAdvance" id="searchProductAdvance" placeholder="Mesas, Sillas, Sillones...">
           </div>
           <div class="form-group mb-3">
-            <label for="minPrice">Desde (USD)</label>
+            <label for="minPrice">Desde ($USD)</label>
             <input type="text" class="form-control mb-2" name="minPrice" id="minPrice" placeholder="Precio mínimo" min="1" >
-            <label for="maxPrice">Hasta(USD)</label>
+            <label for="maxPrice">Hasta ($USD)</label>
             <input type="text" class="form-control" name="maxPrice" id="maxPrice" placeholder="Precio máximo" min="1" >
           </div>
           <div class="form-group mb-3">
@@ -91,11 +91,12 @@
       <li class="nav-item active">
         <h5><a class="nav-link" href="/products">Productos <span class="sr-only">(current)</span></a></h5>
       </li>
-      
+      <li class="nav-item active nav-link font-weight-bold">|</li>
     {{#if user}}
       <li class="nav-item">
         <h5><a class="nav-link" href="/user/profile">Perfil</a></h5>
       </li>
+      <li class="nav-item active nav-link font-weight-bold">|</li>
       <li class="nav-item">
         <h5><a class="nav-link" href="/auth/logout">Logout</a></h5>
       </li>
@@ -103,6 +104,7 @@
         <li class="nav-item">
           <h5><a class="nav-link" href="/comments/">Mis Comentarios</a></h5>
         </li>
+        <li class="nav-item active nav-link font-weight-bold">|</li>
         <li class="nav-item">
           <h5><a class="nav-link" href="/cart"><img src="https://www.flaticon.com/svg/static/icons/svg/846/846423.svg" width="30" height="30" loading="lazy" alt="Carrito"></a></h5>
         </li>
@@ -110,6 +112,7 @@
         <li class="nav-item">
           <h5><a class="nav-link" href="/products/myProducts">Mis Productos</a></h5>
         </li>
+        <li class="nav-item active nav-link font-weight-bold">|</li>
         <li class="nav-item">
           <h5><a class="nav-link" href="/products/new">Agregar Producto</a></h5>
         </li>
@@ -118,6 +121,7 @@
       <li class="nav-item">
         <h5><a class="nav-link" href="/auth/login">Login</a></h5>
       </li>
+      <li class="nav-item active nav-link font-weight-bold">|</li>
       <li class="nav-item">
         <h5><a class="nav-link" href="/auth/signup">Sign up</a></h5>
       </li>

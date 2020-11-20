@@ -21,9 +21,10 @@ exports.searchBar = async (req, res) => {
       $options: "i",
     },
   });
-  products.map(
-    (ele) => (ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`)
-  );
+  products.map((ele) => {
+    ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`;
+    ele.image = ele.imagesURL[0];
+  });
   res.render("search/", { products, searchString: searchProductBasic });
 };
 
@@ -59,9 +60,10 @@ exports.advanceSearch = async (req, res) => {
       },
     ],
   });
-  products.map(
-    (ele) => (ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`)
-  );
+  products.map((ele) => {
+    ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`;
+    ele.image = ele.imagesURL[0];
+  });
 
   const nameSearch = names ? ` | Palabras Claves: ${names}` : "";
   const priceMinSearch = minP ? ` | Valor Mínimo: ${minP} ` : "";
