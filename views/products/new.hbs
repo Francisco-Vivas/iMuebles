@@ -1,34 +1,12 @@
-<div class="container">
-<h1 class="display-1 my-5 ml-3">Nuevo Producto</h1>
-<hr>
-<div class="card row my-5 py-5">
-  <div class="col-12">
+<h1>New Product</h1>
 <form action="/products/new" method="post" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="name">Nombre</label>
-    <input type="text" class="form-control"  name="name" id="name" placeholder="¿Cómo se llama?" required>
-  </div>
-  <div class="form-group">
-    <label for="description">Descripción</label>
-    <input type="text" class="form-control" name="description" id="description" placeholder="Cuéntanos un poco sobre tu producto" required>
-  </div>
-
-  <div class="form-group">
-    <label for="imagesURL">Una foto por aquí por favor.</label>
-    <input type="file"  class="form-control-file" name="imagesURL" id="imagesURL"> <br>
-  </div>
-  
-  <div class="form-group">
-    <label for="quantity">Cantidad</label>
-    <input type="number" class="form-control" name="quantity" id="quantity" placeholder="¿Cuántos productos tienes?" minlength="1" required>
-  </div>
-  <div class="form-group">
-    <label for="price">Precio</label>
-    <input type="text" class="form-control" name="price" id="priceProducts" placeholder="¿Cuánto cuesta?" pattern="^[1-9]\d*.[0-9]\d*" minlength="1" required>
-  </div>
-  
+  <input type="text" name="name" id="name" placeholder="name" required> <br>
+  <input type="text" name="description" id="description" placeholder="description"> <br>
+  <input type="file" name="imagesURL" id="imagesURL"> <br>
+  <input type="number" name="quantity" id="quantity" placeholder="quantity" minlength="1" required> <br>
+  <input type="text" name="price" id="priceProducts" placeholder="price" pattern="^[1-9]\d*.[0-9]\d*" minlength="1" required> <br>
   <label for="category">Categoría</label>
-  <select name="category" id="category" class="form-control form-control-lg">
+  <select name="category" id="category">
     <option value="Sin Categoría">Sin Categoría</option>
     <option value="Sofás">Sofás</option>
     <option value="Mesas">Mesas</option>
@@ -54,14 +32,6 @@
     <option value="Unidades de Almacenamiento de Oficina">Unidades de Almacenamiento de Oficina</option>
     <option value="Repisas de Oficina">Repisas de Oficina</option>
     <option value="Estaciones de trabajo">Estaciones de trabajo</option>  
-  </select> 
-  <div class="form-group row my-4 mx-auto">
-    <div class="col-sm-10 mx-auto text-center">
-      <button type="submit" class="btn btn-primary">¡Agregar producto!</button>
-    </div>
-  </div>
+  </select> <br>
+  <button type="submit">Add new product</button>
 </form>
-</div>
-</div>
-
-</div>
