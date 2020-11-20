@@ -5,10 +5,11 @@ const productModel = require('../models/Product.model')
 
 /* GET home page */
 router.get('/', async (req, res, next) => {
-  const categoryView = await productModel.find({category:["Sillas", "Escritorios", "Sofás"], imageURL:[0]});
-  // console.log(req.user)
-  console.log (categoryView)
-  res.render('index', {categoryView});
+  let categoryViewSillas = await productModel.find({category:["Sillas"]});
+  let categoryViewEsc = await productModel.find({category:["Escritorios"]});
+  let categoryViewSof = await productModel.find({category:["Sofás"]});
+  console.log (categoryViewSillas)
+  res.render('index', {categoryViewSillas, categoryViewEsc, categoryViewSof});
 });
 
 

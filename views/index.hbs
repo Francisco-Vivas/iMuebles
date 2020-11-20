@@ -1,6 +1,4 @@
 
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
 
 {{!-- Slides --}}
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -43,16 +41,35 @@
 </div>
 
 {{!-- Sections --}}
-<div>
-  {{#each products}}
-  {{#each Sillas}}
+<div id="category-home">
+<h3>Sillas</h3>
+  {{#each categoryViewSillas}}
   {{#each imagesURL}}
-<img src="{{this}}" alt="sillas-picture" style="width: 5rem; height:auto">
+  <img href="/products/{{_id}}" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto">
+  <a href="/products/{{_id}}"></a>
+  {{/each}}
+  {{/each}}
+  
+</div>
 
+<div id="category-home">
+  <h3>Escritorios</h3>
+   {{#each categoryViewEsc}}
+  {{#each imagesURL}}
+  <img src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto">
+   <a href="/products/{{_id}}"></a>
   {{/each}}
   {{/each}}
-  {{/each}}
+</div>
 
+<div id="category-home">
+  <h3>Sofás</h3>
+   {{#each categoryViewSof}}
+  {{#each imagesURL}}
+  <img href="/products/{{_id}}" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto">
+  <a href="/products/{{_id}}"></a>
+  {{/each}}
+  {{/each}}
 </div>
 
 
