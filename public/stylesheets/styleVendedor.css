@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Montserrat&display=swap");
+body {
+  padding: 0;
+  font: 14px "Montserrat", Helvetica, Arial, sans-serif;
+  background-color: #f2f6f5 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Assistant", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.1rem !important;
+}
+
+h5 {
+  margin: 0 !important;
+}
+
+a {
+  color: #4a4a4b !important;
+}
+
+.nav-bar-color {
+  background-color: #94b4a4 !important;
+}
+
+.title-nav-bar {
+  font-size: 2rem !important;
+}
+
+input,
+select {
+  background-color: #f2f6f5 !important;
+}
+
+footer {
+  background-color: #c4c4c4;
+}
+
+.copy {
+  background-color: #969494 !important;
+}
+
+.img-slide {
+  height: 500px;
+  box-sizing: content-box;
+}
+
+.img-home {
+  margin: 20px;
+}
+
+#category-home > h3 {
+  text-align: center;
+}
+
+button {
+  background-color: #f4d9c6 !important;
+  border-color: #f4d9c6 !important;
+  color: #c4c4c4;
+  border-radius: 50rem !important;
+}
+
+.btn-anchor {
+  background-color: #f4d9c6 !important;
+  border-color: #f4d9c6 !important;
+  color: #c4c4c4;
+}
+
+#boughtCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 400px;
+}
+
+.form-container {
+  border: 30px solid #c0dece !important;
+  background-color: #c0dece !important;
+}
+
+#google {
+  width: 200px;
+  text-align: center;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin: 40px 700px;
+}
+
+#btn-google {
+  background-color: white !important;
+}
+
+.account-message {
+  margin: 20px 0px;
+}
