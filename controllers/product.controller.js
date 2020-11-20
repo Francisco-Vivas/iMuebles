@@ -6,7 +6,7 @@ exports.list = async (req, res) => {
   let products = await ProductModel.find();
   if (!products.length)
     return res.render("products/index", {
-      errorMessage: "Wow.. such empty! Try to add something ;)",
+      errorMessage: "Wow.. such empty! Prueba añadiendo algo nuevo ;)",
     });
   products.map((ele) => {
     ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`;
@@ -54,11 +54,11 @@ exports.showDetails = (req, res) => {
 
   ProductModel.findById({ _id: productId })
     .then((product) => {
-      if (!product)
+      if (!product) {
         return res.render("products/detail", {
-          errorMessage: "This product does not exist.",
+          errorMessage: "Este producto no existe.",
         });
-
+      }
       let canEdit;
       if (!req.user || String(product.ownerID) !== String(req.user._id)) {
         canEdit = false;
@@ -74,7 +74,7 @@ exports.showDetails = (req, res) => {
       CommentModel.find({ productId: productId })
         .populate("authorId")
         .then((comments) => {
-          return res.render("products/detail", {
+          const editObject = {
             ...product._doc,
             comments,
             formatedPrice,
@@ -83,7 +83,9 @@ exports.showDetails = (req, res) => {
             canEdit,
             isVendedor,
             isComprador,
-          });
+          };
+
+          return res.render("products/detail", editObject);
         });
     })
     .catch(() =>
@@ -99,7 +101,10 @@ exports.editProductView = async (req, res) => {
   const product = await ProductModel.findById({ _id: productId });
   const image = product.imagesURL[0];
   const images = product.imagesURL.splice(1);
-  if (product) return res.render("products/edit", { product, image, images });
+  if (product) {
+    return res.render("products/edit", { ...product._doc, image, images });
+  }
+
   return res.render("products/edit", {
     errorMessage: "Este producto no existe.",
   });
