@@ -39,10 +39,20 @@ exports.searchBar = async (req, res) => {
     ele.image = ele.imagesURL[0];
   });
 
+  const query = `?searchProductBasic=${searchProductBasic
+    .split(" ")
+    .join("+")}`;
+
   const n = products.length < 9 ? null : pageNum + 1;
   const p = pageNum === 1 ? null : pageNum - 1;
 
-  res.render("search/", { products, n, p, searchString: searchProductBasic });
+  res.render("search/", {
+    products,
+    n,
+    p,
+    query,
+    searchString: searchProductBasic,
+  });
 };
 
 exports.advanceSearch = async (req, res) => {
@@ -53,6 +63,13 @@ exports.advanceSearch = async (req, res) => {
     maxPrice: maxP,
   } = req.query;
   let { pageNum } = req.query;
+
+  const query = `?searchProductAdvance=${names
+    .split(" ")
+    .join("+")}&minPrice=${minP}&maxPrice=${maxP}&category=${section
+    .split(" ")
+    .join("+")}`;
+
   pageNum = Number(pageNum) ? parseInt(pageNum) : 1;
 
   const searchProductAdvance = names
@@ -101,5 +118,5 @@ exports.advanceSearch = async (req, res) => {
   const searchString =
     nameSearch + priceMinSearch + priceMaxSearch + categorySearch;
 
-  res.render("search/", { products, n, p, searchString });
+  res.render("search/", { products, n, p, query, searchString });
 };
