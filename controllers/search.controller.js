@@ -11,21 +11,38 @@ function diacriticSensitiveRegexV2(string = "") {
       .replace(/u|ü|ú|ù/g, "[u,ü,ú,ù]")
   );
 }
+const itemsPerPage = 9;
 
 exports.searchBar = async (req, res) => {
   const { searchProductBasic } = req.query;
+  let { pageNum } = req.query;
+  pageNum = Number(pageNum) ? parseInt(pageNum) : 1;
 
   let products = await ProductModel.find({
-    name: {
-      $regex: diacriticSensitiveRegexV2(searchProductBasic),
-      $options: "i",
-    },
-  });
+    $and: [
+      {
+        name: {
+          $regex: diacriticSensitiveRegexV2(searchProductBasic),
+          $options: "i",
+        },
+        quantity: {
+          $gt: 0,
+        },
+      },
+    ],
+  })
+    .skip((pageNum - 1) * itemsPerPage)
+    .limit(itemsPerPage);
+
   products.map((ele) => {
     ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`;
     ele.image = ele.imagesURL[0];
   });
-  res.render("search/", { products, searchString: searchProductBasic });
+
+  const n = products.length < 9 ? null : pageNum + 1;
+  const p = pageNum === 1 ? null : pageNum - 1;
+
+  res.render("search/", { products, n, p, searchString: searchProductBasic });
 };
 
 exports.advanceSearch = async (req, res) => {
@@ -35,6 +52,8 @@ exports.advanceSearch = async (req, res) => {
     minPrice: minP,
     maxPrice: maxP,
   } = req.query;
+  let { pageNum } = req.query;
+  pageNum = Number(pageNum) ? parseInt(pageNum) : 1;
 
   const searchProductAdvance = names
     ? {
@@ -57,13 +76,22 @@ exports.advanceSearch = async (req, res) => {
           $gte: minPrice,
           $lte: maxPrice,
         },
+        quantity: {
+          $gt: 0,
+        },
       },
     ],
-  });
+  })
+    .skip((pageNum - 1) * itemsPerPage)
+    .limit(itemsPerPage);
+
   products.map((ele) => {
     ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`;
     ele.image = ele.imagesURL[0];
   });
+
+  const n = products.length < 9 ? null : pageNum + 1;
+  const p = pageNum === 1 ? null : pageNum - 1;
 
   const nameSearch = names ? ` | Palabras Claves: ${names}` : "";
   const priceMinSearch = minP ? ` | Valor Mínimo: ${minP} ` : "";
@@ -73,5 +101,5 @@ exports.advanceSearch = async (req, res) => {
   const searchString =
     nameSearch + priceMinSearch + priceMaxSearch + categorySearch;
 
-  res.render("search/", { products, searchString });
+  res.render("search/", { products, n, p, searchString });
 };
