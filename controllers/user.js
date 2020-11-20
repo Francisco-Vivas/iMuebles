@@ -11,9 +11,11 @@ exports.rolAComprador = async (req, res) => {
   await User.findByIdAndUpdate(req.user._id, {
     role: "COMPRADOR",
     isComprador: true,
+    isVendedor: false,
   });
   req.user.role = "COMPRADOR";
   req.user.isComprador = true;
+  req.user.isVendedor = false;
   res.redirect("/");
 };
 
@@ -21,9 +23,11 @@ exports.rolAVendedor = async (req, res) => {
   await User.findByIdAndUpdate(req.user._id, {
     role: "VENDEDOR",
     isComprador: false,
+    isVendedor: true,
   });
   req.user.role = "VENDEDOR";
   req.user.isComprador = false;
+  req.user.isVendedor = true;
   res.redirect("/");
 };
 

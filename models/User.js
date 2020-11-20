@@ -32,6 +32,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    isVendedor: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: {
