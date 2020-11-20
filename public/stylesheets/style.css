@@ -24,7 +24,8 @@ a {
 .title-nav-bar {
   font-size: 2rem !important; }
 
-input {
+input,
+select {
   background-color: #f2f6f5 !important; }
 
 footer {
@@ -60,17 +61,9 @@ button {
   align-items: center;
   padding: 30px 400px; }
 
-#form-container {
-  margin: 50px;
-  position: relative;
-  left: 420px;
-  border: 30px solid #f4d9c6;
-  border-radius: 8px;
-  align-items: center;
-  background-color: #f4d9c6;
-  height: 650px;
-  width: 650px;
-  box-sizing: border-box; }
+.form-container {
+  border: 30px solid #f4d9c6 !important;
+  background-color: #f4d9c6 !important; }
 
 #google {
   width: 200px;

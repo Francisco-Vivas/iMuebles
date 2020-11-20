@@ -8,8 +8,7 @@ exports.getCartItems = async (req, res) => {
 
   let totalPrice = 0;
   const cartItems = cart.productId.map((productId, indx) => {
-    let subtotalValue =
-      cart.quantity[indx] * Number(productId.price / 100).toFixed(2);
+    let subtotalValue = cart.quantity[indx] * productId.price;
     totalPrice += subtotalValue;
     return {
       productId,
@@ -30,7 +29,6 @@ exports.createNewCart = async () => {
 
 exports.showCart = async (req, res) => {
   const { cart, cartItems, totalPrice } = await this.getCartItems(req, res);
-
   if (!cartItems.length) {
     return res.render("cart/index", {
       errorMessage: "Aún no tienes nada en tu carrito. Intenta añadir algo.",
@@ -47,12 +45,11 @@ exports.showCart = async (req, res) => {
       currency_id: "USD",
     };
   });
-  // TODO: REVISAR PRODUCTOAENVIAR ============0*/
+
   const preference = {
     items: productoAEnviar,
   };
 
-  console.log(preference);
   const response = await mercadopago.preferences.create(preference);
   const preferenceId = response.body.id;
 
@@ -101,9 +98,6 @@ exports.addItem = async (req, res) => {
 exports.deleteItem = async (req, res) => {
   const { indx } = req.body;
   const cart = await CartModel.findById(req.user.cartId);
-  console.log(indx);
-  console.log(cart.productId);
-  console.log(cart.productId[indx]);
   const product = await ProductModel.findById(cart.productId[indx]);
 
   product.quantity += Number(cart.quantity[indx]);
@@ -120,15 +114,11 @@ exports.deleteItem = async (req, res) => {
 };
 
 exports.boughtCart = async (req, res) => {
-  //// Almacenar el Id de MercadoPago { data.id, fecha y userId }
-
   // Save date in the cart
   const cart = await CartModel.findById(req.user.cartId);
   cart.buy_date = new Date();
   cart.markModified("date");
   await cart.save();
-
-  // !Enviar aquí correo de confirmación de productos.
 
   // New user cart
   const { _id: newCartId } = await CartModel.create({});

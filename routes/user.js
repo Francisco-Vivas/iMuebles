@@ -6,6 +6,7 @@ const {
   profilePage,
   rolAComprador,
   rolAVendedor,
+  updateData,
 } = require("../controllers/user");
 
 /* Middlewares */
@@ -14,6 +15,7 @@ const { isAuth, isNotAuth, checkRoles } = require("../middlewares");
 //roles//
 
 router.get("/profile", isAuth, profilePage);
+router.post("/profile", isAuth, updateData);
 
 //patch sirve para cambiar o parchar
 
