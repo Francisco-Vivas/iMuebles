@@ -34,7 +34,8 @@ MP_TOKEN
 ```
 
 ### Live test.
-Access to the deployed aplication, [https://imuebles.herokuapp.com/](https://imuebles.herokuapp.com/), and acces with this credentials.
+Access to the deployed aplication, [https://imuebles.herokuapp.com/](https://imuebles.herokuapp.com/), and access with this credentials.
+Signup with your account for better user experience.
 
 > Test user <br>
 > email: user@mail.com <br>
