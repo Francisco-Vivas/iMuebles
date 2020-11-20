@@ -60,4 +60,30 @@ button {
   align-items: center;
   padding: 30px 400px; }
 
+#form-container {
+  margin: 50px;
+  position: relative;
+  left: 420px;
+  border: 30px solid #f4d9c6;
+  border-radius: 8px;
+  align-items: center;
+  background-color: #f4d9c6;
+  height: 650px;
+  width: 650px;
+  box-sizing: border-box; }
+
+#google {
+  width: 200px;
+  text-align: center;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin: 40px 700px; }
+
+#btn-google {
+  background-color: white !important; }
+
+.account-message {
+  margin: 20px 0px; }
+
 /*# sourceMappingURL=style.css.map */
