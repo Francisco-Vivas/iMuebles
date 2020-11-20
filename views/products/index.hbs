@@ -1,10 +1,39 @@
+<div class="container">
 <h1>Products</h1>
 <br>
 {{#if errorMessage}}
 <p style="color: crimson">{{errorMessage}}</p>
 {{/if}}
 
-{{#each products}}
+<div class="card-deck my-5 row">
+  {{#each products}}
+    {{#if quantity}}
+    <div class="col-sm-12 col-md-4 d-flex align-items-stretch">
+      <div class="card my-2 mx-auto" >
+          <img src="{{image}}" class="card-img-top d-block w-100 " alt="product-picture" style="height:20rem; object-fit: cover">
+        <div class="card-header text-center">
+          <h4 class="card-text">{{name}}</h4>
+        </div>
+        <div class="d-flex justify-content-around align-items-baseline">
+        <div class="card-body w-50" >
+          <p class="card-text text-center">
+            <small class="text-muted">
+              {{formatedPrice}} c/u</small> 
+        </div>
+        <div class="card-body w-50" >
+            <a href="/products/{{_id}}" class="btn rounded-pill btn-light ml-4">Ver más</a></p>
+        </div>
+        </div>
+      </div>
+
+    </div>
+    {{/if}}
+  {{/each}}
+</div>
+
+
+
+{{!-- {{#each products}}
 {{#if quantity}}
 <h3>{{name}}</h3>
 {{#each imagesURL}}
@@ -18,4 +47,6 @@
 <a href="/products/{{_id}}">Details</a>
 <hr>
 {{/if}}
-{{/each}}
+{{/each}} --}}
+
+</div>
