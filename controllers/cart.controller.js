@@ -38,8 +38,8 @@ exports.showCart = async (req, res) => {
   const productoAEnviar = cart.productId.map((ele, idx) => {
     return {
       id: ele._id,
-      title: ele.name,
-      description: ele.description.length > 254 ? ele.description.split('').splice(0,253).join('') : ele.description,
+      title: ele.name.length > 254 ? ele.name.split('').splice(0,253).join('') : ele.name,
+      description: ele.category,
       unit_price: Number(ele.price / 100),
       quantity: cart.quantity[idx],
       currency_id: "USD",
