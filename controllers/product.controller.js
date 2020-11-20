@@ -8,9 +8,11 @@ exports.list = async (req, res) => {
     return res.render("products/index", {
       errorMessage: "Wow.. such empty! Try to add something ;)",
     });
-  products.map(
-    (ele) => (ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`)
-  );
+  products.map((ele) => {
+    ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`;
+    ele.image = ele.imagesURL[0];
+  });
+
   return res.render("products/index", { products });
 };
 

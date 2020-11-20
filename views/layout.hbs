@@ -5,75 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
-  {{#if user.isComprador}}
     <link rel="stylesheet" href="/stylesheets/style.css" />
+  {{#if user.isComprador}}
+  <link rel="stylesheet" href="">
   {{else}}
     <link rel="stylesheet" href="/stylesheets/styleVendedor.css" />
   {{/if}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light nav-bar-color">
+  <a class="navbar-brand ml-3" href="/"><h5 class="title-nav-bar">iMuebles</h5></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="dropdown-divider"></div>
+    
+    <div class="form-inline m-auto">
+      {{!-- BUSQUEDA BÁSICA --}}
+      <form action="/search/" method="get" class="form-inline my-2 my-lg-0">
+        <input name="searchProductBasic" id="searchProductBasic" class="form-control mr-sm-2 rounded-pill" type="text" placeholder="¿Qué quieres encontrar hoy?" aria-label="Search">
+        <button class="btn btn-outline-secondary rounded-pill my-2 my-sm-0 mr-sm-2" type="submit">Buscar</button>
+      </form>
 
-  <nav>
-    <a href="/">Home</a>
-    <a href="/products">Products</a> 
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle  btn-sm btn btn-outline-secondary rounded-pill my-2 my-sm-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Avanzada
+        </a>
+        
+        {{!-- BUSQUEDA AVANZADA --}}
+        <form  action="/search/advance/" method="get" class="dropdown-menu p-4">
+          <div class="form-group mb-3">
+            <label for="searchProductAdvance">Palabras Clave (USD)</label>
+             <input type="text" class="form-control" name="searchProductAdvance" id="searchProductAdvance" placeholder="Palabras Claves">
+          </div>
+          <div class="form-group mb-3">
+            <label for="minPrice">Desde (USD)</label>
+            <input type="text" class="form-control mb-2" name="minPrice" id="minPrice" placeholder="Precio mínimo" min="1" >
+            <label for="maxPrice">Hasta(USD)</label>
+            <input type="text" class="form-control" name="maxPrice" id="maxPrice" placeholder="Precio máximo" min="1" >
+          </div>
+          <div class="form-group mb-3">
+            <div class="input-group">
+              <label class="input-group-text" for="category">Categoría</label>
+              <select class="custom-select form-control" name="category" id="category">
+                <option value=""> ————— </option>
+                <option value="Sin Categoría">Sin Categoría</option>
+                <option value="Sofás">Sofás</option>
+                <option value="Mesas">Mesas</option>
+                <option value="Sillas">Sillas</option>
+                <option value="Escritorios">Escritorios</option>
+                <option value="Armarios">Armarios</option>
+                <option value="Otomanos">Otomanos</option>
+                <option value="Mesas de Comedor">Mesas de Comedor</option>
+                <option value="Sillas de Comedor">Sillas de Comedor</option>
+                <option value="Soportes para TV">Soportes para TV</option>
+                <option value="Librerías">Librerías</option>
+                <option value="Futones">Futones</option>
+                <option value="Coffee Tables">Coffee Tables</option>
+                <option value="Taburetes">Taburetes</option>
+                <option value="Mesa de Noche">Mesa de Noche</option>
+                <option value="Mesas de Conferencias">Mesas de Conferencias</option>
+                <option value="Mesas de Entrenamiento">Mesas de Entrenamiento</option>
+                <option value="Sillas de Visitante">Sillas de Visitante</option>
+                <option value="Mesas de Oficina">Mesas de Oficina</option>
+                <option value="Sillas de Oficina">Sillas de Oficina</option>
+                <option value="Sillas Ejecutivas">Sillas Ejecutivas</option>
+                <option value="Taburetes de Oficina">Taburetes de Oficina</option>
+                <option value="Unidades de Almacenamiento de Oficina">Unidades de Almacenamiento de Oficina</option>
+                <option value="Repisas de Oficina">Repisas de Oficina</option>
+                <option value="Estaciones de trabajo">Estaciones de trabajo</option>  
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-secondary rounded-pill my-2 my-sm-0 mx-auto" type="submit">Búsqueda Avanzada</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="dropdown-divider"></div>
 
-    {{!-- BUSQUEDA BÁSICA --}}
-    <form action="/search/" method="get">
-      <input type="text" name="searchProductBasic" id="searchProductBasic" placeholder="Busca aquí">
-      <button type="submit">Buscar</button>
-    </form>
-    {{!-- BUSQUEDA AVANZADA --}}
-    <form action="/search/advance/" method="get">
-      <input type="text" name="searchProductAdvance" id="searchProductAdvance" placeholder="Palabras Claves">
-      <select name="category" id="category">
-        <option value=""> ————— </option>
-        <option value="Sin Categoría">Sin Categoría</option>
-        <option value="Sofás">Sofás</option>
-        <option value="Mesas">Mesas</option>
-        <option value="Sillas">Sillas</option>
-        <option value="Escritorios">Escritorios</option>
-        <option value="Armarios">Armarios</option>
-        <option value="Otomanos">Otomanos</option>
-        <option value="Mesas de Comedor">Mesas de Comedor</option>
-        <option value="Sillas de Comedor">Sillas de Comedor</option>
-        <option value="Soportes para TV">Soportes para TV</option>
-        <option value="Librerías">Librerías</option>
-        <option value="Futones">Futones</option>
-        <option value="Coffee Tables">Coffee Tables</option>
-        <option value="Taburetes">Taburetes</option>
-        <option value="Mesa de Noche">Mesa de Noche</option>
-        <option value="Mesas de Conferencias">Mesas de Conferencias</option>
-        <option value="Mesas de Entrenamiento">Mesas de Entrenamiento</option>
-        <option value="Sillas de Visitante">Sillas de Visitante</option>
-        <option value="Mesas de Oficina">Mesas de Oficina</option>
-        <option value="Sillas de Oficina">Sillas de Oficina</option>
-        <option value="Sillas Ejecutivas">Sillas Ejecutivas</option>
-        <option value="Taburetes de Oficina">Taburetes de Oficina</option>
-        <option value="Unidades de Almacenamiento de Oficina">Unidades de Almacenamiento de Oficina</option>
-        <option value="Repisas de Oficina">Repisas de Oficina</option>
-        <option value="Estaciones de trabajo">Estaciones de trabajo</option>  
-      </select>
-      <input type="text" name="minPrice" id="minPrice" placeholder="Minimum price" min="1" >
-      <input type="text" name="maxPrice" id="maxPrice" placeholder="Maximun price" min="1" >
-      <button type="submit">Buscar</button>
-    </form>
-
+    <ul class="navbar-nav my-auto">
+      <li class="nav-item active">
+        <h5><a class="nav-link" href="/products">Productos <span class="sr-only">(current)</span></a></h5>
+      </li>
+      
     {{#if user}}
-      <a href="/user/profile">Perfil</a>
+      <li class="nav-item">
+        <h5><a class="nav-link" href="/user/profile">Perfil</a></h5>
+      </li>
+      <li class="nav-item">
+        <h5><a class="nav-link" href="/auth/logout">Logout</a></h5>
+      </li>
       {{#if user.isComprador}}
-        <a href="/cart">Carrito</a>
-        <a href="/comments/">Mis Comentarios</a>
+        <li class="nav-item">
+          <h5><a class="nav-link" href="/comments/">Mis Comentarios</a></h5>
+        </li>
+        <li class="nav-item">
+          <h5><a class="nav-link" href="/cart"><img src="https://www.flaticon.com/svg/static/icons/svg/846/846423.svg" width="30" height="30" loading="lazy" alt="Carrito"></a></h5>
+        </li>
       {{else}}
-        <a href="/products/myProducts">Mis Productos</a>
-        <a href="/products/new">Agregar Producto</a>
+        <li class="nav-item">
+          <h5><a class="nav-link" href="/products/myProducts">Mis Productos</a></h5>
+        </li>
+        <li class="nav-item">
+          <h5><a class="nav-link" href="/products/new">Agregar Producto</a></h5>
+        </li>
       {{/if}}
-      <a href="/auth/logout">Logout</a>
     {{else}}
-      <a href="/auth/login">Login</a>
-      <a href="/auth/signup">Signup</a>
+      <li class="nav-item">
+        <h5><a class="nav-link" href="/auth/login">Login</a></h5>
+      </li>
+      <li class="nav-item">
+        <h5><a class="nav-link" href="/auth/signup">Sign up</a></h5>
+      </li>
     {{/if}}
-  </nav>
+      
+    </ul>
+    
+  </div>
+</nav>
 
   {{{body}}}
 
@@ -82,5 +135,22 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
   <script src="/javascripts/script.js"></script>
+
+  <footer>
+    <div class="container">
+      <ul class="list-unstyled list-inline text-center py-4 my-0">
+        <li class="list-inline-item">
+          <h5 class="mb-1">¡Registrate ya!</h5>
+        </li>
+        <li class="list-inline-item">
+          <a href="/signup" class="btn btn-outline-secondary rounded-pill"><h5>Sign up</h5></a>
+        </li>
+    </ul>
+    </div>
+    <div class="text-center py-3 copy">
+        © 2020 Todos los derechos reservados.
+        <a href="#">iMuebles</a>
+    </div>
+  </footer>
 </body>
 </html>
