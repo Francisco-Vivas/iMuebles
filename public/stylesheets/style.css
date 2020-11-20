@@ -56,21 +56,11 @@ footer {
   background-image: white !important;
   margin-bottom: 50px; }
 
- #category-home > h3 {
-   text-align: center;
- } 
+.img-home {
+  margin: 20px; }
 
-/* .escritorios {
-  height: 200px;
-  padding: 0px 150px;
-  background-image: white !important;
-  margin-bottom: 50px; }
-
-.sofas {
-  height: 200px;
-  padding: 0px 150px;
-  background-image: white !important;
-  margin-bottom: 50px; } */
+#category-home > h3 {
+  text-align: center; }
 
 button {
   background-color: #c0dece !important;
@@ -82,6 +72,5 @@ button {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
   color: #c4c4c4; }
-
 
 /*# sourceMappingURL=style.css.map */
