@@ -1,66 +1,108 @@
+<div class="container">
+  <h1 class="display-1 my-5 ml-3">{{name}}</h1>
+  <hr class="mb-5">
 {{#if error}}
 <p style="color: crimson">{{error}}</p>
-<p>But you can create it! <a href="/products/new">Click here.</a></p>
-
+<p>¡Pero tu puedes crearlos! <a href="/products/new">Presiona aquí.</a></p>
 {{/if}}
 
 {{#if name}}
-<h1>{{name}}</h1>
-<br>
-{{#each imagesURL}}
-<img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
-{{/each}}
-<p>{{category}}</p>
-<small><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></small>
-<p>{{description}}</p>
-<hr>
-<form action="/cart/addItem" method="post">
-<input type="text" value="{{_id}}" name="productId" hidden>
-<label for="number">Cantidad:</label> <br>
-<input type="number" name="quantity" max="{{quantity}}" min="0" value="1"> <br>
-<button type="submit">Reservar</button>
-</form>
+<div class="card mb-3" style="">
+  <div class="row no-gutters">
+    <div class="col-md-4 m-auto">
+      <div id="carouselExampleControls" class="carousel slide col-12" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{image}}" class="d-block mx-auto" style="width: 100%;" alt="product-picture">
+          </div>
+          {{#each images}}
+            <div class="carousel-item">
+              <img src="{{this}}" class="d-block mx-auto" style="width: 25rem;" alt="product-picture">
+            </div>
+          {{/each}}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-8 my-auto">
+      <div class="card-body">
+        <div class="row justify-content-between mr-2 my-2">
+          <h3 class="card-title mb-3">{{description}}</h3>
+          {{#if canEdit}}
+            <a href="/products/{{_id}}/edit" class="btn">¡Actualízalo!</a>
+          {{/if}}
+        </div>
+        <p class="card-text mb-1">Precio: {{formatedPrice}} </p>
+        <small><p class="card-text">Disponibles: {{quantity}} unidades.</p></small>
+        <p class="card-text mt-1"><small class="text-muted">{{productId.category}}</small></p>
+        <form action="/cart/addItem" method="post">
+          <input type="text" value="{{_id}}" name="productId" hidden>
+          <div class="input-group align-items-baseline">
+              <div class="input-group-prepend">
+              <label class="ml-1" for="number"><span class="input-group-text">Cantidad:</span></label>
+              </div>
+            <input class="form-control mr-2" type="number" name="quantity" max="{{quantity}}" min="0" value="1">
+            <button class="btn btn-secondary rounded-pill" type="submit">Reservar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-{{#if canEdit}}
-
-<a href="/products/{{_id}}/edit">Edit it!</a>
-{{/if}}
 <br>
 <hr>
 {{#if comments}}
-<br>
-<hr>
-<h3>Comments</h3>
+
+<h3 class="display-4 my-5 ml-3">Comentarios</h3>
+
 {{#each comments}}
-<hr>
-<div style="display: flex; flex-direction:column; justify-content:center">
-  <h3>{{authorId.username}} dijo:</h3>
-  <p style="padding-left: 1.5rem;">{{ content }}</p>
+<div class="card mb-3" style="">
+  <div class="row no-gutters">
+    <div class="col-md-8">
+      <div class="card-body">
+        <blockquote class="blockquote">
+          <p class="mb-0">"{{content}}"</p>
+          <section class="blockquote-footer">{{authorId.username}}</section>
+        </blockquote>
+      </div>
+    </div>
+  </div>
 </div>
 {{/each}}
-{{else}}
-<p>No comments.</p>
-{{/if}}
-{{#if user}}
 <br>
 <hr>
-<form action="/comments/create" method="POST" >
-  <h3>Nuevo Comentario</h3>
-
-  {{!-- AÑADIR CALIFICACIÓN AQUÍ --}}
-
-  <input type="text" id="input-content" name="content" placeholder="Comment!" />
-  <input type="text" id="input-content" name="idProduct" placeholder="Comment!" hidden value="{{_id}}" />
-
-  <button type="submit">Comentar</button>
+{{else}}
+<p class="my-5 ml-3">Sin comentarios.</p>
+{{/if}}
+{{#if user}}
+{{#if user.isComprador}}
+<form action="/comments/create" class="my-5" method="POST" >
+  <h3 class="display-4 my-5 ml-3">Nuevo Comentario</h3>
+  <input type="text" id="input-content" name="idProduct" placeholder="hidden sr!" hidden value="{{_id}}" />
+  <div class="input-group align-items-baseline">
+    <input class="form-control mr-2" type="text" id="input-content" name="content" placeholder="Escribe tu comentario aquí" />
+    <button class="btn btn-secondary rounded-pill" type="submit">Comentar</button>
+  </div>
 
   {{#if errorMessage}}
   <p class="error">{{errorMessage}}</p>
   {{/if}}
 </form>
 {{else}}
-<p>You have to be logged to comment.</p>
+<h5 class="my-5 ml-3">Tu perfil tiene que ser de un Comprador en nuestra plataforma para poder interactuar con otros productos.</h5>
+{{/if}}
+{{else}}
+<h5 class="my-5 ml-3">Tienes que iniciar sesión para comentar.</h5>
 {{/if}}
 
 
 {{/if}}
+</div>
