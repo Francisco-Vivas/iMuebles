@@ -1,12 +1,25 @@
-<h1>Mis Comentarios</h1>
-{{#if comments}}
-<br>
-<hr>
-{{#each comments}}
+<div class="container">
 
-<p style="padding-left: 1.5rem;">{{ content }}</p>
-<p>En {{productId.name}} | <small><a href="/products/{{productId._id}}">Ir al producto</a></small></p>
+<h1 class="display-1 my-5 ml-3">Mis Comentarios</h1>
+<hr>
+{{#if comments}}
+
+{{#each comments}}
+<div class="card mb-3" style="">
+  <div class="row no-gutters">
+    <div class="col-md-8">
+      <div class="card-body">
+        <blockquote class="blockquote">
+          <p class="mb-0">"{{content}}"</p>
+          <section class="blockquote-footer">En <cite title="{{productId.name}}"><a href="/products/{{productId._id}}">{{productId.name}}</a></cite></section>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</div>
 {{/each}}
+<br>
 {{else}}
-<p>No has hecho comentarios.</p>
+<h5>No has hecho comentarios.</h5>
 {{/if}}
+</div>
