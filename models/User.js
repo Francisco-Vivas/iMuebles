@@ -21,8 +21,8 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["ADMIN", "VENDEDOR", "COMPRADOR", "USUARIO"],
-      default: "USUARIO",
+      enum: ["ADMIN", "VENDEDOR", "COMPRADOR"],
+      default: "COMPRADOR",
     },
     location: String,
     facebookID: String,
