@@ -6,7 +6,8 @@ exports.list = async (req, res) => {
   let products = await ProductModel.find();
   if (!products.length)
     return res.render("products/index", {
-      errorMessage: "Wow.. such empty! Try to add something ;)",
+      errorMessage: `Wow.. such empty! 
+      Intenta añadir algo nuevo ;)`,
     });
   products.map((ele) => {
     ele.formatedPrice = `$${(ele.price / 100).toFixed(2)} USD`;
@@ -22,7 +23,7 @@ exports.showFormNew = (req, res) => {
 
 exports.create = async (req, res) => {
   const { name, description, quantity, price, category } = req.body;
-  console.log(price);
+
   let newProduct;
   if (req.file) {
     newProduct = {
@@ -54,27 +55,36 @@ exports.showDetails = (req, res) => {
 
   ProductModel.findById({ _id: productId })
     .then((product) => {
-      if (!product)
+      if (!product) {
         return res.render("products/detail", {
-          errorMessage: "This product does not exist.",
+          errorMessage: "Este producto no existe.",
         });
-      if (!req.user || String(product.ownerID) !== String(req.user._id)) {
-        product.canEdit = false;
-      } else {
-        product.canEdit = true;
       }
-      product.formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
+      if (!req.user || String(product.ownerID) !== String(req.user._id)) {
+        canEdit = false;
+      } else {
+        canEdit = true;
+      }
+      formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
+      image = product.imagesURL[0];
+      images = product.imagesURL.splice(1);
 
       CommentModel.find({ productId: productId })
         .populate("authorId")
         .then((comments) => {
-          console.log(comments);
-          return res.render("products/detail", { ...product._doc, comments });
+          return res.render("products/detail", {
+            ...product._doc,
+            comments,
+            formatedPrice,
+            image,
+            images,
+            canEdit,
+          });
         });
     })
     .catch(() =>
       res.render("products/detail", {
-        errorMessage: "This product does not exist.",
+        errorMessage: "Este producto no existe :(.",
       })
     );
 };
@@ -83,9 +93,13 @@ exports.editProductView = async (req, res) => {
   const { productId } = req.params;
 
   const product = await ProductModel.findById({ _id: productId });
-  if (product) return res.render("products/edit", product);
+  const image = product.imagesURL[0];
+  const images = product.imagesURL.splice(1);
+  if (product) {
+    return res.render("products/edit", { ...product._doc, image, images });
+  }
   return res.render("products/edit", {
-    errorMessage: "This product does not exist.",
+    errorMessage: "Este producto no existe :(.",
   });
 };
 
