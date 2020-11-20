@@ -1,22 +1,39 @@
-<h1>Resultados de</h1>
-<h3>{{searchString}}</h3>
-<br>
+<div class="container">
+
+<h1 class="display-1 mt-5 ml-3">Resultados de</h1>
+<h3 class="display-4 mb-5 ml-5 ml-3">{{searchString}}</h1>
+
 {{#if errorMessage}}
 <p style="color: crimson">{{errorMessage}}</p>
 {{/if}}
 
-{{#each products}}
-{{#if quantity}}
-<h3>{{name}}</h3>
-{{#each imagesURL}}
-<img src="{{this}}" alt="product-picture" style="width: 5rem; height:auto">
-{{/each}}
-<small>{{category}}</small>
-<p><span>{{formatedPrice}}</span> c/u : Disponible(s) - <span>{{quantity}}</span></p>
+<div class="card-deck my-5 row">
+  {{#each products}}
+    {{#if quantity}}
+    <div class="col-sm-12 col-md-4 d-flex align-items-stretch">
+      <div class="card my-2 mx-auto" >
+          <img src="{{image}}" class="card-img-top d-block w-100 " alt="product-picture" style="height:20rem; object-fit: cover">
+        <div class="card-header text-center">
+          <h4 class="card-text">{{name}}</h4>
+          <p class="card-text text-center">
+            <small class="text-muted">
+              {{category}}</small> </p>
+        </div>
+        <div class="d-flex justify-content-around align-items-baseline">
+        <div class="card-body w-50" >
+          <p class="card-text text-center">
+            <small class="text-muted">
+              {{formatedPrice}} c/u</small> </p>
+        </div>
+        <div class="card-body w-50" >
+            <a href="/products/{{_id}}" class="btn rounded-pill btn-light ml-4 btn-anchor" style="object-fit: cover">Ver más</a>
+        </div>
+        </div>
+      </div>
 
+    </div>
+    {{/if}}
+  {{/each}}
+</div>
 
-
-<a href="/products/{{_id}}">Details</a>
-<hr>
-{{/if}}
-{{/each}}
+</div>
