@@ -36,7 +36,9 @@
         <div class="row justify-content-between mr-2 my-2">
           <h3 class="card-title mb-3">{{description}}</h3>
           {{#if canEdit}}
+          {{#if isCliente}}
             <a href="/products/{{_id}}/edit" class="btn">¡Actualízalo!</a>
+          {{/if}}
           {{/if}}
         </div>
         <p class="card-text mb-1">Precio: {{formatedPrice}} </p>

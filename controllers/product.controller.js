@@ -65,9 +65,10 @@ exports.showDetails = (req, res) => {
       } else {
         canEdit = true;
       }
-      formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
-      image = product.imagesURL[0];
-      images = product.imagesURL.splice(1);
+      const formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
+      const image = product.imagesURL[0];
+      const images = product.imagesURL.splice(1);
+      const isCliente = req.user.isCliente;
 
       CommentModel.find({ productId: productId })
         .populate("authorId")
@@ -79,6 +80,7 @@ exports.showDetails = (req, res) => {
             image,
             images,
             canEdit,
+            isCliente,
           });
         });
     })
