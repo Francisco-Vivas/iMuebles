@@ -73,4 +73,10 @@ button {
   border-color: #c0dece !important;
   color: #c4c4c4; }
 
+#boughtCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 400px; }
+
 /*# sourceMappingURL=style.css.map */
