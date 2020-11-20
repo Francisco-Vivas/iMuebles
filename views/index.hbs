@@ -1,5 +1,4 @@
 
-
 {{!-- Slides --}}
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -7,26 +6,26 @@
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
+  
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="/images/Slides/slide1.jpg" class="d-block w-100"  class="img-slide" alt="slide1">
-       <div class="carousel-caption d-none d-md-block">
-        <h5>Alquila tus muebles favoritos</h5>
-        
+       <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
+        <h5 style="letter-spacing: 0.1rem; color: #b0b0b0" class="display-4 pb-5 ">Alquila tus muebles favoritos</h5>
       </div>
     </div>
     <div class="carousel-item">
       <img src="/images/Slides/slide2.jpg" class="d-block w-100"  class="img-slide" alt="slide2">
-       <div class="carousel-caption d-none d-md-block">
-        <h5>A precios accesibles</h5>
-        
+       <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
+        <h5 style="letter-spacing: 0.1rem; color: #b0b0b0" class="display-4 pb-5 ">A precios accesibles</h5>
+
       </div>
     </div>
     <div class="carousel-item">
       <img src="/images/Slides/slide3.jpg" class="d-block w-100" class="img-slide" alt="slide3">
-       <div class="carousel-caption d-none d-md-block">
-        <h5>En iMuebles</h5>
-       
+       <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
+        <h5 style="letter-spacing: 0.1rem; color: #b0b0b0" class="display-4 pb-5 ">En iMuebles</h5>
+
       </div>
     </div>
   </div>
@@ -40,41 +39,37 @@
   </a>
 </div>
 
-
+<br>
 {{!-- Sections --}}
-<div id="category-home">
-<h3>Sillas</h3>
+<div class="container">
+<div class="my-4 px-2">
+<h3 class="text-center">Sillas</h3>
+<hr>
   {{#each categoryViewSillas}}
   {{#each imagesURL}}
-  <a href="/products/{{_id}}"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
+   <a href="/products/{{_id}}"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
   {{/each}}
   {{/each}}
-  
-</div>
 
-<div id="category-home">
-  <h3>Escritorios</h3>
+</div>
+<div class="my-4 px-2">
+  <h3 class="text-center">Escritorios</h3>
+<hr>
    {{#each categoryViewEsc}}
   {{#each imagesURL}}
   <a href="/products/{{_id}}"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
-   
   {{/each}}
   {{/each}}
 </div>
-
-<div id="category-home">
-  <h3>Sofás</h3>
+<div class="my-4 px-2">
+  <h3 class="text-center">Sofás</h3>
+  <hr>
    {{#each categoryViewSof}}
   {{#each imagesURL}}
   <a href="/products/{{_id}}"><img class="img-home" src="{{this}}" alt="sillas-picture" style="width: 10rem; height:auto"></a>
-  
   {{/each}}
   {{/each}}
 </div>
 
-
-
-
-
-
+</div>
 

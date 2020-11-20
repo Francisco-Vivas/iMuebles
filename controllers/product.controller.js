@@ -58,18 +58,31 @@ exports.showDetails = (req, res) => {
         return res.render("products/detail", {
           errorMessage: "This product does not exist.",
         });
+
+      let canEdit;
       if (!req.user || String(product.ownerID) !== String(req.user._id)) {
         product.canEdit = false;
       } else {
         product.canEdit = true;
       }
-      product.formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
+
+      const formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
+      const image = product.imagesURL[0];
+      const images = product.imagesURL.splice(1);
+      const isCliente = req.user.isCliente;
 
       CommentModel.find({ productId: productId })
         .populate("authorId")
         .then((comments) => {
-          console.log(comments);
-          return res.render("products/detail", { ...product._doc, comments });
+          return res.render("products/detail", {
+            ...product._doc,
+            comments,
+            formatedPrice,
+            image,
+            images,
+            canEdit,
+            isCliente,
+          });
         });
     })
     .catch(() =>
