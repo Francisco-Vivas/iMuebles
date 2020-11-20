@@ -7,7 +7,7 @@ exports.googleInit = passport.authenticate("google", {
   ],
 });
 
-exports.googleCb = passport.authenticate("google", {
-  successRedirect: "/user/profile",
+exports.googleCb =  passport.authenticate("google", {
+  successRedirect: "/user/profile", 
   failureRedirect: "/login",
 });
