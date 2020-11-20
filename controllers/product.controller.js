@@ -88,7 +88,7 @@ exports.showDetails = (req, res) => {
     })
     .catch(() =>
       res.render("products/detail", {
-        errorMessage: "This product does not exist.",
+        errorMessage: "Este producto no existe.",
       })
     );
 };
@@ -101,7 +101,7 @@ exports.editProductView = async (req, res) => {
   const images = product.imagesURL.splice(1);
   if (product) return res.render("products/edit", { product, image, images });
   return res.render("products/edit", {
-    errorMessage: "This product does not exist.",
+    errorMessage: "Este producto no existe.",
   });
 };
 
