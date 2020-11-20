@@ -36,8 +36,7 @@ a {
   font-size: 2rem !important;
 }
 
-input,
-select {
+input {
   background-color: #f2f6f5 !important;
 }
 
@@ -49,21 +48,10 @@ footer {
   background-color: #969494 !important;
 }
 
-// Home //
 .img-slide {
   height: 500px;
   box-sizing: content-box;
 }
-
-// .texto-index-inicio {
-//   padding-bottom: 500px !important;
-//   color: #b0b0b0 !important;
-// }
-
-// .texto-index-inicio > h5 {
-//   font-size: 4rem !important;
-//   font-family: "Assistant", Helvetica, Arial, sans-serif !important;
-// }
 
 .img-home {
   margin: 20px;
@@ -85,6 +73,7 @@ button {
   border-color: #c0dece !important;
   color: #c4c4c4;
 }
+
 
 #boughtCart {
   display: flex;
