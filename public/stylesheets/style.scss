@@ -49,6 +49,30 @@ footer {
   background-color: #969494 !important;
 }
 
+// Home //
+.img-slide {
+  height: 500px;
+  box-sizing: content-box;
+}
+
+// .texto-index-inicio {
+//   padding-bottom: 500px !important;
+//   color: #b0b0b0 !important;
+// }
+
+// .texto-index-inicio > h5 {
+//   font-size: 4rem !important;
+//   font-family: "Assistant", Helvetica, Arial, sans-serif !important;
+// }
+
+.img-home {
+  margin: 20px;
+}
+
+#category-home > h3 {
+  text-align: center;
+}
+
 button {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
@@ -60,4 +84,11 @@ button {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
   color: #c4c4c4;
+}
+
+#boughtCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 400px;
 }

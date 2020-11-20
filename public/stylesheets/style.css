@@ -34,6 +34,16 @@ footer {
 .copy {
   background-color: #969494 !important; }
 
+.img-slide {
+  height: 500px;
+  box-sizing: content-box; }
+
+.img-home {
+  margin: 20px; }
+
+#category-home > h3 {
+  text-align: center; }
+
 button {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
@@ -44,5 +54,11 @@ button {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
   color: #c4c4c4; }
+
+#boughtCart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 400px; }
 
 /*# sourceMappingURL=style.css.map */
