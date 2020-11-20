@@ -48,6 +48,52 @@ footer {
   background-color: #969494 !important;
 }
 
+
+// Home //
+.carousel-inner{
+  height: 600px;
+  padding: 0px 150px;
+  margin-bottom: 50px;
+  
+}
+
+.img-slide {
+  height: 500px;
+   box-sizing: content-box;
+}
+
+.carousel-caption.d-none.d-md-block{
+  padding-bottom: 500px;
+  color: #B0B0B0;
+  
+}
+.carousel-caption.d-none.d-md-block > h5{
+  font-size: 4rem;
+  font-family:"Assistant", Helvetica, Arial, sans-serif;
+}
+
+.sillas{
+  height: 200px;
+  padding: 0px 150px;
+  background-image:white !important;
+  margin-bottom: 50px;
+}
+
+.escritorios{
+  height: 200px;
+  padding: 0px 150px;
+  background-image:white !important;
+  margin-bottom: 50px;
+}
+
+.sofas{
+  height: 200px;
+  padding: 0px 150px;
+  background-image:white !important;
+  margin-bottom: 50px;
+}
+
+
 button {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
@@ -60,3 +106,4 @@ button {
   border-color: #c0dece !important;
   color: #c4c4c4;
 }
+
