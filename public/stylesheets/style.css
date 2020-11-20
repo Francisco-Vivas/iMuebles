@@ -2,7 +2,8 @@
 body {
   padding: 0;
   font: 14px "Montserrat", Helvetica, Arial, sans-serif;
-  background-color: #f2f6f5 !important; }
+  background-color: #f2f6f5 !important;
+}
 
 h1,
 h2,
@@ -10,60 +11,75 @@ h3,
 h4,
 h5 {
   font-family: "Assistant", Helvetica, Arial, sans-serif;
-  letter-spacing: 0.1rem !important; }
+  letter-spacing: 0.1rem !important;
+}
 
 h5 {
-  margin: 0 !important; }
+  margin: 0 !important;
+}
 
 a {
-  color: #4a4a4b !important; }
+  color: #4a4a4b !important;
+}
 
 .nav-bar-color {
-  background-color: #e5c5b5 !important; }
+  background-color: #e5c5b5 !important;
+}
 
 .title-nav-bar {
-  font-size: 2rem !important; }
+  font-size: 2rem !important;
+}
 
 input,
 select {
-  background-color: #f2f6f5 !important; }
+  background-color: #f2f6f5 !important;
+}
 
 footer {
-  background-color: #c4c4c4; }
+  background-color: #c4c4c4;
+}
 
 .copy {
-  background-color: #969494 !important; }
+  background-color: #969494 !important;
+}
 
 .img-slide {
   height: 500px;
-  box-sizing: content-box; }
+  box-sizing: content-box;
+}
 
 .img-home {
-  margin: 20px; }
+  margin: 20px;
+}
 
 #category-home > h3 {
-  text-align: center; }
+  text-align: center;
+}
 
 button {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
   color: #c4c4c4;
-  border-radius: 50rem !important; }
+  border-radius: 50rem !important;
+}
 
 .btn-anchor {
   background-color: #c0dece !important;
   border-color: #c0dece !important;
-  color: #c4c4c4; }
+  color: #c4c4c4;
+}
 
 #boughtCart {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px 400px; }
+  padding: 30px 400px;
+}
 
 .form-container {
   border: 30px solid #f4d9c6 !important;
-  background-color: #f4d9c6 !important; }
+  background-color: #f4d9c6 !important;
+}
 
 #google {
   width: 200px;
@@ -71,12 +87,15 @@ button {
   display: flex;
   align-self: center;
   justify-content: center;
-  margin: 40px 700px; }
+  margin: 40px 700px;
+}
 
 #btn-google {
-  background-color: white !important; }
+  background-color: white !important;
+}
 
 .account-message {
-  margin: 20px 0px; }
+  margin: 20px 0px;
+}
 
 /*# sourceMappingURL=style.css.map */
