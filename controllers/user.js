@@ -4,7 +4,6 @@ const router = express.Router();
 const User = require("../models/User");
 
 exports.profilePage = (req, res) => {
-  console.log(req.user);
   res.render("profile", req.user);
 };
 

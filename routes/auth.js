@@ -42,13 +42,15 @@ router.post("/signup", (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   if (email === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate email and password" });
+    res.render("auth/signup", {
+      message: "Verifique que las credenciales ya estén bien",
+    });
     return;
   }
 
   User.findOne({ email }, "email", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The email already exists" });
+      res.render("auth/signup", { message: "Este correo ya existe." });
       return;
     }
 
@@ -69,10 +71,10 @@ router.post("/signup", (req, res, next) => {
       .save()
       .then(() => {
         sendBienvenida(newUser);
-        res.redirect("/");
+        res.redirect("/login");
       })
       .catch((err) => {
-        res.render("auth/signup", { message: "Something went wrong" });
+        res.render("auth/signup", { message: "Algo pasó :(" });
       });
   });
 });

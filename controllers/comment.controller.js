@@ -4,7 +4,7 @@ exports.listPosts = async (req, res) => {
   const comments = await CommentModel.find({ authorId: req.user._id }).populate(
     "productId"
   );
-  console.log(comments);
+
   return res.render("comments/", { comments });
 };
 

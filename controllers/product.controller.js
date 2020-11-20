@@ -22,7 +22,7 @@ exports.showFormNew = (req, res) => {
 
 exports.create = async (req, res) => {
   const { name, description, quantity, price, category } = req.body;
-  console.log(price);
+
   let newProduct;
   if (req.file) {
     newProduct = {

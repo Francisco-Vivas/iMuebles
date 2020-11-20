@@ -36,8 +36,6 @@ exports.showCart = async (req, res) => {
   }
 
   const productoAEnviar = cart.productId.map((ele, idx) => {
-    console.log(ele);
-    console.log(ele.price);
     return {
       id: ele._id,
       title: ele.name,
@@ -47,12 +45,11 @@ exports.showCart = async (req, res) => {
       currency_id: "USD",
     };
   });
-  // TODO: REVISAR PRODUCTOAENVIAR ============0*/
+
   const preference = {
     items: productoAEnviar,
   };
 
-  console.log(preference);
   const response = await mercadopago.preferences.create(preference);
   const preferenceId = response.body.id;
 
@@ -102,9 +99,6 @@ exports.deleteItem = async (req, res) => {
   const { indx } = req.body;
   const cart = await CartModel.findById(req.user.cartId);
   const product = await ProductModel.findById(cart.productId[indx]);
-  console.log(indx);
-  console.log(cart.productId);
-  console.log(cart.productId[indx]);
 
   product.quantity += Number(cart.quantity[indx]);
   product.save();
@@ -120,15 +114,11 @@ exports.deleteItem = async (req, res) => {
 };
 
 exports.boughtCart = async (req, res) => {
-  //// Almacenar el Id de MercadoPago { data.id, fecha y userId }
-
   // Save date in the cart
   const cart = await CartModel.findById(req.user.cartId);
   cart.buy_date = new Date();
   cart.markModified("date");
   await cart.save();
-
-  // !Enviar aquí correo de confirmación de productos.
 
   // New user cart
   const { _id: newCartId } = await CartModel.create({});
