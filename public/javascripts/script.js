@@ -1,7 +1,7 @@
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    console.log("This was made with love!");
+    console.log("This was made with love by Francisco Vivas and Karen Roth!");
 
     const $priceInput = document.querySelector("#priceProducts");
     if ($priceInput) $priceInput.value /= 100;

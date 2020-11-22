@@ -2,7 +2,7 @@
 <div class="row justify-content-between align-items-center mx-auto">
   <div class="col-lg-10 my-5">
     <h1 class="display-1 ml-3">Bienvenido a tu perfil </h1>
-    <h2 class="display-4 ml-3 ">{{username}}</h2>
+    <h2 class="display-4 ml-3 text-right">{{username}}</h2>
   </div>
   <div class="col-lg-2">
     <img src={{pictureURL}} alt="profile-picture" class="rounded-circle img-fluid" style="width: 10rem; box-shadow: 0 5px 15px -8px rgba(0,0,0,.34), 0 8px 10px -5px rgba(0,0,0,.3);">
@@ -19,12 +19,12 @@
 <div class="row">
   <div class="col-6 text-center mt-4 mb-5">
     <form  action="/user/checkvendedor" method="POST">
-      <button type="submit" class="p-3 border-0" style="color:grey" >Quiero Ofrecer</button>
+      <button type="submit" class="p-3 border-0" style="color:white" >Quiero Ofrecer</button>
     </form>
   </div>
   <div class="col-6 text-center mt-4 mb-5">      
     <form  action="/user/checkcomprador" method="POST"  >
-      <button  type="submit" class="p-3 border-0" style="color:grey" >Quiero Reservar</button>
+      <button  type="submit" class="p-3 border-0" style="color:white" >Quiero Reservar</button>
     </form> 
   </div>
 </div>
