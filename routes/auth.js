@@ -2,7 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const User = require("../models/User");
-
+const { profilePicture } = require("../configs/cloudinary.configs");
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 
@@ -37,47 +37,59 @@ router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-router.post("/signup", (req, res, next) => {
-  const username = req.body.username;
-  const email = req.body.email;
-  const password = req.body.password;
-  if (email === "" || password === "") {
-    res.render("auth/signup", {
-      message: "Verifique que las credenciales ya estén bien",
-    });
-    return;
-  }
+router.post(
+  "/signup",
+  profilePicture.single("pictureInputURL"),
+  (req, res, next) => {
+    const { username, email, password, userlastname } = req.body;
 
-  User.findOne({ email }, "email", (err, user) => {
-    if (user !== null) {
-      res.render("auth/signup", { message: "Este correo ya existe." });
+    if (email === "" || password === "") {
+      res.render("auth/signup", {
+        message: "Verifique que las credenciales ya estén bien",
+      });
       return;
     }
 
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
+    User.findOne({ email }, "email", (err, user) => {
+      if (user !== null) {
+        res.render("auth/signup", { message: "Este correo ya existe." });
+        return;
+      }
 
-    let cartId;
-    createNewCart().then((id) => (cartId = id));
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
 
-    const newUser = new User({
-      cartId,
-      username,
-      email,
-      password: hashPass,
-    });
+      let pictureURL;
+      if (req.file) {
+        pictureURL = req.file.path;
+      } else {
+        pictureURL =
+          "https://www.flaticon.com/svg/static/icons/svg/847/847969.svg";
+      }
 
-    newUser
-      .save()
-      .then(() => {
-        sendBienvenida(newUser);
-        res.redirect("/auth/login");
-      })
-      .catch((err) => {
-        res.render("auth/signup", { message: "Algo pasó :(" });
+      createNewCart().then((cartId) => {
+        const newUser = new User({
+          cartId,
+          username,
+          userlastname,
+          email,
+          password: hashPass,
+          pictureURL,
+        });
+
+        newUser
+          .save()
+          .then(() => {
+            sendBienvenida(newUser);
+            res.redirect("/auth/login");
+          })
+          .catch((err) => {
+            res.render("auth/signup", { message: "Algo pasó :(" });
+          });
       });
-  });
-});
+    });
+  }
+);
 
 router.get("/logout", (req, res) => {
   req.logout();

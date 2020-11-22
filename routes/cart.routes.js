@@ -5,7 +5,7 @@ const {
   boughtCart,
 } = require("../controllers/cart.controller");
 const { sendFactura } = require("../controllers/nodemailerController");
-const { isAuth, isNotAuth, checkRoles } = require("../middlewares");
+const { isAuth, checkRoles } = require("../middlewares");
 
 const router = require("express").Router();
 

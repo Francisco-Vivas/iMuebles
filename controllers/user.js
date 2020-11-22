@@ -3,6 +3,20 @@ const { findByIdAndUpdate } = require("../models/User");
 const router = express.Router();
 const User = require("../models/User");
 
+function updateValue(value, defaultVal) {
+  if (req.file) {
+    pictureURL = req.file.path;
+  } else {
+    let defaultPic =
+      "https://www.flaticon.com/svg/static/icons/svg/847/847969.svg";
+    if (req.user.profilePage === defaultPic) {
+      pictureURL = defaultPic;
+    } else {
+      pictureURL = req.user.pictureURL;
+    }
+  }
+}
+
 exports.profilePage = (req, res) => {
   res.render("profile", req.user);
 };
@@ -32,13 +46,33 @@ exports.rolAVendedor = async (req, res) => {
 };
 
 exports.updateData = async (req, res) => {
-  const { username, email } = req.body;
-  console.log(username);
-  await User.findByIdAndUpdate(req.user._id, { username, email });
-  console.log(req.user);
+  const { username, email, userlastname } = req.body;
+
+  let pictureURL;
+  if (req.file) {
+    pictureURL = req.file.path;
+  } else {
+    let defaultPic =
+      "https://www.flaticon.com/svg/static/icons/svg/847/847969.svg";
+    if (req.user.profilePage === defaultPic) {
+      pictureURL = defaultPic;
+    } else {
+      pictureURL = req.user.pictureURL;
+    }
+  }
+
+  await User.findByIdAndUpdate(req.user._id, {
+    username,
+    email,
+    userlastname,
+    pictureURL,
+  });
+
   req.user.username = username;
   req.user.email = email;
-  console.log({ ...req.user });
+  req.user.userlastname = userlastname;
+  req.user.pictureURL = pictureURL;
+
   res.render("profile", {
     ...req.user._doc,
     message: "Tus datos se han actualizado satisfactoriamente.",

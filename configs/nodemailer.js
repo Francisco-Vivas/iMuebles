@@ -173,7 +173,7 @@ Ahora sí puedes aprovechar para alquilar todo tipo de exclusivos muebles o para
 							<tr>
 								<td class="editable-img" align="center">
 									
-										<img editable="true" mc:edit="image105" src="https://www.flaticon.com/svg/static/icons/svg/847/847969.svg" style="width: 10rem;display:block; line-height:0; font-size:0; border:0;" border="0" alt="image">
+										<img editable="true" mc:edit="image105" src=${newUser.pictureURL} style="width: 10rem;display:block; line-height:0; font-size:0; border:0;" border="0" alt="image">
 									
 								</td>
 							</tr><!-- END main-icon -->
@@ -208,7 +208,7 @@ Ahora sí puedes aprovechar para alquilar todo tipo de exclusivos muebles o para
 												<table class="button_bg_color_93c054" bgcolor="#93c054" width="190" height="45" align="center" border="0" cellpadding="0" cellspacing="0" style="border-radius:5px; border-collapse: separate">
 													<tbody><tr>
 														<td mc:edit="text105" align="center" valign="middle" style="font-size: 14px; font-weight: 400; font-family: 'Open Sans', Helvetica, sans-serif; mso-line-height-rule: exactly;">
-															<div class="editable-text"><multiline><a href="http://imuebles.herokuapp.com/login" style="text-decoration: none;"><span style="color:#FFFFFF;">¡Ingresa ahora!</span></a></multiline></div>
+															<div class="editable-text"><multiline><a href="http://imuebles.herokuapp.com/auth/login" style="text-decoration: none;"><span style="color:#FFFFFF;">¡Ingresa ahora!</span></a></multiline></div>
 														</td>
 													</tr>
 												</tbody></table>
@@ -376,7 +376,7 @@ exports.mailFactura = (cartHTMLList, totalSection, req) => {
                   <!-- email heading -->
                   <tbody><tr>
                     <td align="left" mc:edit="text101" class="text_color_282828 center_content" style="line-height: 1;color: #282828; font-size: 18px; font-weight: 600; font-family: 'Open Sans', Helvetica, sans-serif; mso-line-height-rule: exactly;">
-                      <div class="editable-text"><multiline>Hola ${req.user.username}, aquí está tu carrito.</multiline></div>
+                      <div class="editable-text"><multiline>Hola ${req.user.username}, aquí está tu factura.</multiline></div>
                     </td>
                   </tr><!-- END email heading -->
     
@@ -451,6 +451,6 @@ exports.mailFactura = (cartHTMLList, totalSection, req) => {
     </html>
     `,
     text:
-      "Estos son tus productos alquilados. Abra este correo en su navegador del computador para una mejor experiencia.",
+      "Estos son tus productos alquilados. Abre este correo en su navegador del computador para una mejor experiencia.",
   });
 };

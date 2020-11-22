@@ -19,4 +19,27 @@ const storage = new CloudStorage({
   },
 });
 
-module.exports = multer({ storage });
+exports.fileUploader = multer({ storage });
+
+const pictureStorage = new CloudStorage({
+  cloudinary,
+  params: (req, file) => {
+    return {
+      folder: "iMueble",
+      allowed_formats: ["jpg", "png"],
+      public_id: `app-${file.originalname}`,
+      transformation: [
+        {
+          width: 400,
+          height: 400,
+          gravity: "face",
+          radius: "max",
+          crop: "crop",
+        },
+        { width: 200, crop: "scale" },
+      ],
+    };
+  },
+});
+
+exports.profilePicture = multer({ storage: pictureStorage });

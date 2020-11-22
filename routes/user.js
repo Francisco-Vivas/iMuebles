@@ -1,4 +1,5 @@
 const express = require("express");
+const { profilePicture } = require("../configs/cloudinary.configs");
 const router = express.Router();
 
 //controllers
@@ -10,12 +11,17 @@ const {
 } = require("../controllers/user");
 
 /* Middlewares */
-const { isAuth, isNotAuth, checkRoles } = require("../middlewares");
+const { isAuth } = require("../middlewares");
 
 //roles//
 
 router.get("/profile", isAuth, profilePage);
-router.post("/profile", isAuth, updateData);
+router.post(
+  "/profile",
+  isAuth,
+  profilePicture.single("pictureInputURL"),
+  updateData
+);
 
 //patch sirve para cambiar o parchar
 
