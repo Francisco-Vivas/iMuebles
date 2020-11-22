@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 
   for (let user of users) {
     user.userlastname = user.userlastname || user.username.split(" ")[1] || " ";
-    user.cardId = user.cardId || (await createNewCart());
+    user.cartId = user.cartId || (await createNewCart());
     user.pictureURL =
       user.pictureURL ||
       "https://www.flaticon.com/svg/static/icons/svg/847/847969.svg";
