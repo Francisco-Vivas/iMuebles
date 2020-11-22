@@ -1,6 +1,7 @@
 const ProductModel = require("../models/Product.model");
 const mercadopago = require("../configs/mercadopago");
 const CommentModel = require("../models/Comment.model");
+const { modelName } = require("../models/Product.model");
 const itemsPerPage = 9;
 
 exports.list = async (req, res) => {
@@ -167,11 +168,26 @@ exports.editProduct = async (req, res) => {
 };
 
 exports.showMyProducts = async (req, res) => {
+  let modalDialog;
+  if (req.user.productJustDeleted) {
+    req.user.productJustDeleted = false;
+    modalDialog = true;
+  }
+
   let products = await ProductModel.find({ ownerID: req.user._id });
   if (!products)
     return res.render("products/myProducts", {
       errorMessage: "No tienes productos aún :(",
     });
   products.map((ele) => (ele.price = Number(ele.price / 100).toFixed(2)));
-  return res.render("products/myProducts", { products });
+
+  return res.render("products/myProducts", { products, modalDialog });
+};
+
+exports.deleteProduct = async (req, res) => {
+  const { productId } = req.params;
+  console.log(productId);
+  await ProductModel.findByIdAndDelete(productId);
+  req.user.productJustDeleted = true;
+  res.redirect("/products/myProducts");
 };

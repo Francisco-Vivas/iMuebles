@@ -16,6 +16,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    userlastname: {
+      type: String,
+      required: true,
+    },
     password: {
       type: String,
     },
@@ -23,6 +27,10 @@ const userSchema = new Schema(
       type: String,
       enum: ["ADMIN", "VENDEDOR", "COMPRADOR"],
       default: "COMPRADOR",
+    },
+    pictureURL: {
+      type: String,
+      default: "https://www.flaticon.com/svg/static/icons/svg/847/847969.svg",
     },
     location: String,
     facebookID: String,

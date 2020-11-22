@@ -13,6 +13,7 @@ passport.use(
     },
     async (_, __, profile, done) => {
       try {
+        console.log(profile);
         const user = await User.findOne({ googleID: profile.id });
         if (user) {
           return done(null, user);
@@ -21,7 +22,9 @@ passport.use(
         const cartId = await createNewCart();
 
         const newUser = await User.create({
-          username: profile.displayName,
+          username: profile.name.givenName,
+          userlastname: profile.name.familyName,
+          pictureURL: profile.photos[0].value,
           cartId,
           email: profile.emails[0].value,
           googleID: profile.id,

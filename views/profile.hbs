@@ -1,7 +1,17 @@
 <div class="container">
-<h1 class="display-1 my-5 ml-3">Bienvenido a tu perfil </h1>
-<h2 class="display-4 ml-3">{{username}}</h2>
+<div class="row justify-content-between align-items-center mx-auto">
+  <div class="col-lg-10 my-5">
+    <h1 class="display-1 ml-3">Bienvenido a tu perfil </h1>
+    <h2 class="display-4 ml-3 ">{{username}}</h2>
+  </div>
+  <div class="col-lg-2">
+    <img src={{pictureURL}} alt="profile-picture" class="rounded-circle img-fluid" style="width: 10rem; box-shadow: 0 5px 15px -8px rgba(0,0,0,.34), 0 8px 10px -5px rgba(0,0,0,.3);">
+  </div>
+</div>
 <hr>
+
+<div class="mx-auto my-4">
+</div>
 
 <h3 class="my-5 ml-3">Actualmente eres <span class="font-weight-light">{{role}}</span></h3>
 <h5>Elije una opción para cambiar tu rol.</h5>
@@ -25,12 +35,20 @@
 <hr>
 <div class="card row my-5 p-5">
   <div class="col-12">  
-<form action="/user/profile" method="post" >
+<form action="/user/profile" method="post" enctype="multipart/form-data" >
 
   <div class="form-group">
     <label for="name">Nombre</label>
     <input type="text" class="form-control"  name="username" value="{{username}}" id="name" placeholder="¿Cómo te llamas?" required>
   </div>
+  <div class="form-group">
+    <label for="lastname">Apellido</label>
+    <input type="text" class="form-control" name="userlastname" value="{{userlastname}}" id="lastname">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Foto de perfil</label>
+    <input name="pictureInputURL" type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>    
   <div class="form-group">
     <label for="description">Correo electrónico</label>
     <input type="email" class="form-control" name="email" id="description" value="{{email}}" placeholder="¿A qué correo te podemos localizar?" required>

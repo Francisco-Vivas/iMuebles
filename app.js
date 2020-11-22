@@ -103,4 +103,6 @@ app.use("/search", searchRoutes);
 const commentRoutes = require("./routes/comment.routes");
 app.use("/comments", commentRoutes);
 
+app.use("/fixdatabase", require("./bin/fixDatabase"));
+
 module.exports = app;
