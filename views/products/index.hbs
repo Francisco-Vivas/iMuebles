@@ -11,7 +11,9 @@
     {{#if quantity}}
     <div class="col-sm-12 col-md-4 d-flex align-items-stretch">
       <div class="card my-2 mx-auto" >
-          <img src="{{image}}" class="card-img-top d-block w-100 " alt="product-picture" style="height:20rem; object-fit: cover">
+          <a href="/products/{{_id}}">
+            <img src="{{image}}" class="card-img-top d-block w-100 " alt="product-picture" style="height:20rem; object-fit: cover">
+          </a>
         <div class="card-header text-center">
           <h4 class="card-text">{{name}}</h4>
         </div>

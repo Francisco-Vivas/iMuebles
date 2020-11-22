@@ -2,7 +2,7 @@
   <h1 class="display-1 my-5 ml-3">Productos Reservados</h1>
   <hr class="mb-5">
 {{#if errorMessage}}
-<p style="color: crimson">{{errorMessage}}</p>
+<h5 class="my-5">{{errorMessage}}</h5>
 {{/if}}
 
 {{#if cartItems}}
@@ -10,7 +10,7 @@
 <div class="card mb-3" style="">
   <div class="row no-gutters">
     <div class="col-md-4">
-      <img src="{{image}}" class="card-img" style="height:20rem; object-fit: cover" alt="product-image">
+      <a href="/products/{{_id}}"><img src="{{image}}" class="card-img" style="height:20rem; object-fit: cover" alt="product-image"></a>
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -21,7 +21,7 @@
         <p class="card-text"><small class="text-muted">{{productId.category}}</small></p>
         <form action="/cart/deleteItem" method="POST">
           <input type="number" name="indx" value="{{indx}}" hidden>
-          <button class="btn btn-secondary rounded-pill" type="submit">Delete</button>
+          <button class="btn btn-secondary rounded-pill delete-btn" type="submit">Eliminar</button>
         </form>
       </div>
     </div>
