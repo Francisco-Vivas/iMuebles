@@ -74,6 +74,7 @@ exports.showDetails = (req, res) => {
           errorMessage: "Este producto no existe.",
         });
       }
+
       let canEdit;
       if (!req.user || String(product.ownerID) !== String(req.user._id)) {
         canEdit = false;
@@ -83,8 +84,8 @@ exports.showDetails = (req, res) => {
       const formatedPrice = `$${(product.price / 100).toFixed(2)} USD`;
       const image = product.imagesURL[0];
       const images = product.imagesURL.splice(1);
-      const isVendedor = req.user.isVendedor;
-      const isComprador = req.user.isComprador;
+      const isVendedor = req.user ? req.user.isVendedor : false;
+      const isComprador = req.user ? req.user.isComprador : true;
 
       CommentModel.find({ productId: productId })
         .populate("authorId")
@@ -186,7 +187,6 @@ exports.showMyProducts = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   const { productId } = req.params;
-  console.log(productId);
   await ProductModel.findByIdAndDelete(productId);
   req.user.productJustDeleted = true;
   res.redirect("/products/myProducts");
